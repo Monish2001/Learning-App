@@ -4,14 +4,16 @@ using Learning_App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Learning_App.Migrations
 {
     [DbContext(typeof(LearningAppDbContext))]
-    partial class LearningAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211008121701_AddTrackQuestionsToDatabase")]
+    partial class AddTrackQuestionsToDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,29 +246,6 @@ namespace Learning_App.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("Learning_App.Models.Sessions", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Sessions");
-                });
-
             modelBuilder.Entity("Learning_App.Models.StudentEnrollments", b =>
                 {
                     b.Property<int>("Id")
@@ -296,9 +275,6 @@ namespace Learning_App.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClassId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DOB")
                         .HasColumnType("datetime2");
 
@@ -321,8 +297,6 @@ namespace Learning_App.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClassId");
 
                     b.HasIndex("OtpId");
 
@@ -405,47 +379,6 @@ namespace Learning_App.Migrations
                     b.ToTable("TrackPdf");
                 });
 
-            modelBuilder.Entity("Learning_App.Models.TrackQuestions", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Attempted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("MarkedForReview")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("MarksObtained")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("OptionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StudentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TrackExcerciseId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OptionId");
-
-                    b.HasIndex("QuestionId");
-
-                    b.HasIndex("StudentId");
-
-                    b.HasIndex("TrackExcerciseId");
-
-                    b.ToTable("TrackQuestions");
-                });
-
             modelBuilder.Entity("Learning_App.Models.TrackVideos", b =>
                 {
                     b.Property<int>("Id")
@@ -505,7 +438,7 @@ namespace Learning_App.Migrations
             modelBuilder.Entity("Learning_App.Models.Chapters", b =>
                 {
                     b.HasOne("Learning_App.Models.Subjects", "Subject")
-                        .WithMany("Chapter")
+                        .WithMany()
                         .HasForeignKey("SubjectId");
 
                     b.Navigation("Subject");
@@ -523,7 +456,7 @@ namespace Learning_App.Migrations
             modelBuilder.Entity("Learning_App.Models.Contents", b =>
                 {
                     b.HasOne("Learning_App.Models.Chapters", "Chapter")
-                        .WithMany("Content")
+                        .WithMany()
                         .HasForeignKey("ChapterId");
 
                     b.Navigation("Chapter");
@@ -532,7 +465,7 @@ namespace Learning_App.Migrations
             modelBuilder.Entity("Learning_App.Models.Excercises", b =>
                 {
                     b.HasOne("Learning_App.Models.Chapters", "Chapter")
-                        .WithMany("Excercise")
+                        .WithMany()
                         .HasForeignKey("ChapterId");
 
                     b.Navigation("Chapter");
@@ -541,7 +474,7 @@ namespace Learning_App.Migrations
             modelBuilder.Entity("Learning_App.Models.Notes", b =>
                 {
                     b.HasOne("Learning_App.Models.Contents", "Content")
-                        .WithMany("Note")
+                        .WithMany()
                         .HasForeignKey("ContentId");
 
                     b.HasOne("Learning_App.Models.Students", "Student")
@@ -556,7 +489,7 @@ namespace Learning_App.Migrations
             modelBuilder.Entity("Learning_App.Models.Options", b =>
                 {
                     b.HasOne("Learning_App.Models.Questions", "Question")
-                        .WithMany("Option")
+                        .WithMany()
                         .HasForeignKey("QuestionId");
 
                     b.Navigation("Question");
@@ -569,15 +502,6 @@ namespace Learning_App.Migrations
                         .HasForeignKey("ExcerciseId");
 
                     b.Navigation("Excercise");
-                });
-
-            modelBuilder.Entity("Learning_App.Models.Sessions", b =>
-                {
-                    b.HasOne("Learning_App.Models.Students", "Student")
-                        .WithMany("Session")
-                        .HasForeignKey("StudentId");
-
-                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Learning_App.Models.StudentEnrollments", b =>
@@ -597,10 +521,6 @@ namespace Learning_App.Migrations
 
             modelBuilder.Entity("Learning_App.Models.Students", b =>
                 {
-                    b.HasOne("Learning_App.Models.Classes", "Class")
-                        .WithMany("Student")
-                        .HasForeignKey("ClassId");
-
                     b.HasOne("Learning_App.Models.OTP", "Otp")
                         .WithMany()
                         .HasForeignKey("OtpId");
@@ -608,8 +528,6 @@ namespace Learning_App.Migrations
                     b.HasOne("Learning_App.Models.StudentEnrollments", "StudentEnrollment")
                         .WithMany()
                         .HasForeignKey("StudentEnrollmentId");
-
-                    b.Navigation("Class");
 
                     b.Navigation("Otp");
 
@@ -643,7 +561,7 @@ namespace Learning_App.Migrations
             modelBuilder.Entity("Learning_App.Models.TrackPdf", b =>
                 {
                     b.HasOne("Learning_App.Models.Contents", "Content")
-                        .WithMany("TrackPdf")
+                        .WithMany()
                         .HasForeignKey("ContentId");
 
                     b.HasOne("Learning_App.Models.Students", "Student")
@@ -653,33 +571,6 @@ namespace Learning_App.Migrations
                     b.Navigation("Content");
 
                     b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("Learning_App.Models.TrackQuestions", b =>
-                {
-                    b.HasOne("Learning_App.Models.Options", "Option")
-                        .WithMany()
-                        .HasForeignKey("OptionId");
-
-                    b.HasOne("Learning_App.Models.Questions", "Question")
-                        .WithMany()
-                        .HasForeignKey("QuestionId");
-
-                    b.HasOne("Learning_App.Models.Students", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId");
-
-                    b.HasOne("Learning_App.Models.TrackExcercises", "TrackExcercise")
-                        .WithMany()
-                        .HasForeignKey("TrackExcerciseId");
-
-                    b.Navigation("Option");
-
-                    b.Navigation("Question");
-
-                    b.Navigation("Student");
-
-                    b.Navigation("TrackExcercise");
                 });
 
             modelBuilder.Entity("Learning_App.Models.TrackVideos", b =>
@@ -717,47 +608,16 @@ namespace Learning_App.Migrations
                     b.Navigation("Class");
                 });
 
-            modelBuilder.Entity("Learning_App.Models.Chapters", b =>
-                {
-                    b.Navigation("Content");
-
-                    b.Navigation("Excercise");
-                });
-
             modelBuilder.Entity("Learning_App.Models.Classes", b =>
                 {
-                    b.Navigation("Student");
-
                     b.Navigation("StudentEnrollment");
 
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("Learning_App.Models.Contents", b =>
-                {
-                    b.Navigation("Note");
-
-                    b.Navigation("TrackPdf");
-                });
-
             modelBuilder.Entity("Learning_App.Models.Excercises", b =>
                 {
                     b.Navigation("Question");
-                });
-
-            modelBuilder.Entity("Learning_App.Models.Questions", b =>
-                {
-                    b.Navigation("Option");
-                });
-
-            modelBuilder.Entity("Learning_App.Models.Students", b =>
-                {
-                    b.Navigation("Session");
-                });
-
-            modelBuilder.Entity("Learning_App.Models.Subjects", b =>
-                {
-                    b.Navigation("Chapter");
                 });
 #pragma warning restore 612, 618
         }

@@ -7,16 +7,20 @@ using System.Threading.Tasks;
 
 namespace Learning_App.Models
 {
-    public class Classes
+    public class Excercises
     {
         [Key]
         public int Id { get; set; }
         [Required]
         public string Title { get; set; }
-        
-        public Boards Board { get; set; }
-        public ICollection<StudentEnrollments> StudentEnrollment {get; set;}
-        public ICollection<Subjects> Subject {get; set;}
-        public ICollection<Students> Student {get; set;}
+        [Required]
+        public DateTime TimeLimit { get; set; }
+        [Required]
+        public int NoOfQuestions { get; set; }
+        [Required]
+        public int MaxCredit { get; set; }
+
+        public Chapters Chapter {get; set;}
+        public ICollection<Questions> Question {get;set;}
     }
 }
