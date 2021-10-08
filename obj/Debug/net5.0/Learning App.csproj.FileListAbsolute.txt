@@ -1,0 +1,61 @@
+/home/rootquotient/Learning App/obj/Debug/net5.0/Learning App.csproj.AssemblyReference.cache
+/home/rootquotient/Learning App/obj/Debug/net5.0/Learning App.GeneratedMSBuildEditorConfig.editorconfig
+/home/rootquotient/Learning App/obj/Debug/net5.0/Learning App.AssemblyInfoInputs.cache
+/home/rootquotient/Learning App/obj/Debug/net5.0/Learning App.AssemblyInfo.cs
+/home/rootquotient/Learning App/obj/Debug/net5.0/Learning App.csproj.CoreCompileInputs.cache
+/home/rootquotient/Learning App/obj/Debug/net5.0/Learning App.MvcApplicationPartsAssemblyInfo.cs
+/home/rootquotient/Learning App/obj/Debug/net5.0/Learning App.MvcApplicationPartsAssemblyInfo.cache
+/home/rootquotient/Learning App/bin/Debug/net5.0/appsettings.Development.json
+/home/rootquotient/Learning App/bin/Debug/net5.0/appsettings.json
+/home/rootquotient/Learning App/bin/Debug/net5.0/Learning App
+/home/rootquotient/Learning App/bin/Debug/net5.0/Learning App.deps.json
+/home/rootquotient/Learning App/bin/Debug/net5.0/Learning App.runtimeconfig.json
+/home/rootquotient/Learning App/bin/Debug/net5.0/Learning App.runtimeconfig.dev.json
+/home/rootquotient/Learning App/bin/Debug/net5.0/Learning App.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/ref/Learning App.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Learning App.pdb
+/home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.Data.SqlClient.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Relational.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.SqlServer.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.Extensions.DependencyInjection.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.Identity.Client.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.IdentityModel.Logging.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.IdentityModel.Tokens.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.OpenApi.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Newtonsoft.Json.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Swashbuckle.AspNetCore.Swagger.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/System.Configuration.ConfigurationManager.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/System.Diagnostics.DiagnosticSource.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/System.IdentityModel.Tokens.Jwt.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/System.Runtime.Caching.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/System.Security.Cryptography.ProtectedData.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/runtimes/unix/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/runtimes/win/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.pdb
+/home/rootquotient/Learning App/bin/Debug/net5.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.pdb
+/home/rootquotient/Learning App/bin/Debug/net5.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.pdb
+/home/rootquotient/Learning App/bin/Debug/net5.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.pdb
+/home/rootquotient/Learning App/bin/Debug/net5.0/runtimes/win/lib/netstandard2.0/System.Runtime.Caching.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
+/home/rootquotient/Learning App/obj/Debug/net5.0/staticwebassets/Learning App.StaticWebAssets.Manifest.cache
+/home/rootquotient/Learning App/obj/Debug/net5.0/staticwebassets/Learning App.StaticWebAssets.xml
+/home/rootquotient/Learning App/obj/Debug/net5.0/scopedcss/bundle/Learning App.styles.css
+/home/rootquotient/Learning App/obj/Debug/net5.0/Learning App.RazorTargetAssemblyInfo.cache
+/home/rootquotient/Learning App/obj/Debug/net5.0/Learning App.csproj.CopyComplete
+/home/rootquotient/Learning App/obj/Debug/net5.0/Learning App.dll
+/home/rootquotient/Learning App/obj/Debug/net5.0/ref/Learning App.dll
+/home/rootquotient/Learning App/obj/Debug/net5.0/Learning App.pdb
+/home/rootquotient/Learning App/obj/Debug/net5.0/Learning App.genruntimeconfig.cache
+/home/rootquotient/Learning App/bin/Debug/net5.0/Humanizer.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Design.dll

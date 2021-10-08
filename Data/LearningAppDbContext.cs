@@ -14,6 +14,21 @@ namespace Learning_App.Data
         {
 
         }
-        public DbSet<LearningApp> LearningApp { get; set; }
+        public DbSet<Students> Students { get; set; }
+        public DbSet<StudentEnrollments> StudentEnrollments { get; set; }
+        public DbSet<Boards> Boards { get; set; }
+        public DbSet<Classes> Classes { get; set; }
     }
 }
+
+// using Microsoft.EntityFrameworkCore;
+
+// namespace Learning_App.Data {
+//     public class LearningAppDbContext : DbContext {
+//         public LearningAppDbContext (DbContextOptions<LearningAppDbContext> options) : base (options) { }
+//         public DbSet<Students> Students { get; set; }
+//         public DbSet<StudentEnrollments> StudentEnrollments { get; set; }
+//         public DbSet<Boards> Boards { get; set; }
+//         public DbSet<Classes> Classes { get; set; }
+//     }
+// }

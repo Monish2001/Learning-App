@@ -16,7 +16,8 @@ namespace Learning_App.Models
         [Required]
         public string Description { get; set; }
         
-        public blob Logo{ get; set; }
+        public string Logo{ get; set; }
         
+        public ICollection<Classes> Class {get; set;}
     }
 }

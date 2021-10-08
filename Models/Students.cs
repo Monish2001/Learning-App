@@ -19,5 +19,11 @@ namespace Learning_App.Models
         public string FullName{ get; set; }
         [Required]
         public DateTime DOB { get; set; }
+
+        public StudentEnrollments StudentEnrollment {get; set;}
+        public OTP Otp {get; set;}
+        // public Classes Class {get; set;}
+
+    
     }
 }
