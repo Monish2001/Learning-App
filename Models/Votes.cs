@@ -13,7 +13,8 @@ namespace Learning_App.Models
         public int Id { get; set; }
         
         [Required]
-        public DateTime CreatedTime {get;set;}
+        // public DateTime CreatedTime {get;set;}
+        public long Createdtime {get; set;}
 
         public bool IsVoted { get; set; }
         

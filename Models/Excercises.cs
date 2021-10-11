@@ -14,7 +14,8 @@ namespace Learning_App.Models
         [Required]
         public string Title { get; set; }
         [Required]
-        public DateTime TimeLimit { get; set; }
+        // public DateTime TimeLimit { get; set; }
+        public long Timelimit {get; set;}
         [Required]
         public int NoOfQuestions { get; set; }
         [Required]

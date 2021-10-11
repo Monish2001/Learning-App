@@ -59,3 +59,4 @@
 /home/rootquotient/Learning App/bin/Debug/net5.0/Humanizer.dll
 /home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Design.dll
 /home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Newtonsoft.Json.dll

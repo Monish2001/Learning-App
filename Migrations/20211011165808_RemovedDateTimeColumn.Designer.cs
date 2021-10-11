@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Learning_App.Migrations
 {
     [DbContext(typeof(LearningAppDbContext))]
-    [Migration("20211011085848_ChangedDateTimeToLong")]
-    partial class ChangedDateTimeToLong
+    [Migration("20211011165808_RemovedDateTimeColumn")]
+    partial class RemovedDateTimeColumn
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -134,9 +134,6 @@ namespace Learning_App.Migrations
                     b.Property<int>("NoOfQuestions")
                         .HasColumnType("int");
 
-                    b.Property<long>("TimeLimit")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -157,9 +154,6 @@ namespace Learning_App.Migrations
 
                     b.Property<int?>("ContentId")
                         .HasColumnType("int");
-
-                    b.Property<long>("CreatedTime")
-                        .HasColumnType("bigint");
 
                     b.Property<string>("Note")
                         .IsRequired()
@@ -183,9 +177,6 @@ namespace Learning_App.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("GeneratedTime")
-                        .HasColumnType("bigint");
 
                     b.Property<int>("Otp")
                         .HasColumnType("int");
@@ -236,9 +227,6 @@ namespace Learning_App.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("TimeLimit")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ExcerciseId");
@@ -252,9 +240,6 @@ namespace Learning_App.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CreatedTime")
-                        .HasColumnType("bigint");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
@@ -300,9 +285,6 @@ namespace Learning_App.Migrations
 
                     b.Property<int?>("ClassId")
                         .HasColumnType("int");
-
-                    b.Property<long>("DOB")
-                        .HasColumnType("bigint");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -361,14 +343,8 @@ namespace Learning_App.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("EndTime")
-                        .HasColumnType("bigint");
-
                     b.Property<int?>("ExcerciseId")
                         .HasColumnType("int");
-
-                    b.Property<long>("StartTime")
-                        .HasColumnType("bigint");
 
                     b.Property<int?>("StudentId")
                         .HasColumnType("int");
@@ -455,17 +431,11 @@ namespace Learning_App.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("CompletedDuration")
-                        .HasColumnType("bigint");
-
                     b.Property<int?>("ContentId")
                         .HasColumnType("int");
 
                     b.Property<int?>("StudentId")
                         .HasColumnType("int");
-
-                    b.Property<long>("TotalDuration")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -485,9 +455,6 @@ namespace Learning_App.Migrations
 
                     b.Property<int?>("ContentId")
                         .HasColumnType("int");
-
-                    b.Property<long>("CreatedTime")
-                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsVoted")
                         .HasColumnType("bit");

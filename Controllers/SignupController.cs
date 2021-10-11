@@ -4,8 +4,13 @@ using System.Collections.Generic;
 using Learning_App.Models.Serializer;
 using Learning_App.Data;
 using Learning_App.Models;
+// using Learning_App.Models.Serializer;
 using Learning_App.Utils;
-using System.Diagnostics;
+// using System.Diagnostics;
+using System.Text.Json;
+using Newtonsoft.Json.Linq;
+using System;
+
 
 namespace Learning_App.Controllers
 {
@@ -24,10 +29,17 @@ namespace Learning_App.Controllers
         [Route("api/signup")]
         public IActionResult Signup([FromForm]SignupRequestRoot s_r)    
         {    
-            // OTP OtpObj = GenerateOTP();
-            // string OtpId = OtpObj.Id;
+            // Debug.WriteLine("inside signup");
+            OTP OtpObj = GenerateOTP();
+            int OtpId = OtpObj.Id;
+
+            Console.WriteLine(OtpId);
+            // Debug.WriteLine(OtpId);
+            // s_r.OtpId = OtpId;
             Students s = s_r.createStudentObject();
             // s.OtpId = OtpId;
+            // s.Otp.Id = OtpId;
+            // Console.WriteLine(s.Otp.Id);
             _db.Students.Add(s);
             _db.SaveChanges();
 
@@ -35,26 +47,46 @@ namespace Learning_App.Controllers
             return Ok(strng1);
         }
 
-        // public void GenerateOTP()
-        // {
-        //     System.Guid OTPuuid = System.Guid.NewGuid();
-        //     string OTPuuidAsString = OTPuuid.ToString();
+        public OTP GenerateOTP()
+        {
+            // System.Guid OTPuuid = System.Guid.NewGuid();
+            // string OTPuuidAsString = OTPuuid.ToString();
+            // Debug.WriteLine("inside otp gene");
+            // RandomNumber rn = null;
+            RandomNumber rn = new RandomNumber();
+            int Otp = rn.GenerateRandomNo();
+
+            // DateTime GeneratedTime = DateTime(2000-08-09 00:00:00);
+            // DateTime GeneratedTime = new DateTime(2000, 08, 08, 00, 00, 00);
+            // DateTime hardcodeValue = new DateTime(yearInt, monthInt, dayInt, hourInt, minuteInt, secondInt);
+            long Generatedtime = 1633973956;
+            // OTPs OtpObj = new OTPs();
             
-        //     RandomNumber rn = null;
-        //     int Otp = rn.GenerateRandomNo();
+            
 
-        //     DateTime GeneratedTime = "2000-08-09 00:00:00";
+            // OTPs OtpObj = new OTPs();
 
-        //     OTP OtpObj = new OTP();
+            // OtpObj.Id = OTPuuidAsString;
+            // OtpObj.Otp = Otp;
+            // OtpObj.Generatedtime = Generatedtime;
 
-        //     OtpObj.Id = OTPuuidAsString;
-        //     OtpObj.Otp = Otp;
-        //     OtpObj.GeneratedTime = GeneratedTime;
+            // OtpRequestRoot OtpObj = new OtpRequestRoot();
 
-        //     _db.OTP.Add(OtpObj);
-        //     _db.SaveChanges();
+            var OtpObj = new OTP
+            {
+                Otp = Otp,
+                Generatedtime = Generatedtime
+            };
 
-        //     return OtpObj;
-        // }
+            // string jsonString = JsonSerializer.Serialize(OtpObj);
+            // string jsonString = JsonConvert.SerializeOnbject(OtpObj);
+            // JObject json = JObject.Parse(jsonString);
+            // OtpRequestRoot o = OtpRequestRoot.createOTP();
+
+            _db.OTP.Add(OtpObj);
+            _db.SaveChanges();
+
+            return OtpObj;
+        }
     }
 }

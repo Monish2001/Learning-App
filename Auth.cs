@@ -8,16 +8,16 @@ namespace Learning_App
 {
     public class Auth : IJwtAuth
     {
-        private readonly string username = "kirtesh";
-        private readonly string password = "Demo1";
+        private readonly string mobileno = "8608319422";
+        private readonly int otp = 1234;
         private readonly string key;
         public Auth(string key)
         {
             this.key = key;
         }
-        public string Authentication(string username, string password)
+        public string Authentication(string mobileno, int otp)
         {
-            if (!(username.Equals(username) || password.Equals(password)))
+            if (!(mobileno.Equals(mobileno) || otp.Equals(otp)))
             {
                 return null;
             }
@@ -34,7 +34,7 @@ namespace Learning_App
                 Subject = new ClaimsIdentity(
                     new Claim[]
                     {
-                        new Claim(ClaimTypes.Name, username)
+                        new Claim(ClaimTypes.Name, mobileno)
                     }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(

@@ -14,8 +14,9 @@ namespace Learning_App.Models
         [Required]
         public string Note { get; set; }
         [Required]
-        public DateTime CreatedTime {get; set;}
-        
+        // public DateTime CreatedTime {get; set;}
+        public long Createdtime {get;set;}
+
         public Contents Content {get; set;}
         public Students Student {get;set;}
         

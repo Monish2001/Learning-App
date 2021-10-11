@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Ax/PxY3lnbpvkqAr+vSUO0oRiKW9bIPTReiBDbgLQZ3Fq/KPsFj3ZptTxIkTkINxK2AADxdjgivq3QP+b72boQ==",
+  "dgSpecHash": "bZOmozx680WiwYe2RA2hlnDGSx1jA038wnFpkdZ+Iw4v9R3EsS+WcsreF+7+uKAB2Iqe5PpuE0W38zcNKEYTvg==",
   "success": true,
   "projectFilePath": "/home/rootquotient/Learning App/Learning App.csproj",
   "expectedPackageFiles": [
@@ -54,6 +54,7 @@
     "/home/rootquotient/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
     "/home/rootquotient/.nuget/packages/microsoft.win32.registry/4.7.0/microsoft.win32.registry.4.7.0.nupkg.sha512",
     "/home/rootquotient/.nuget/packages/microsoft.win32.systemevents/4.7.0/microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "/home/rootquotient/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
     "/home/rootquotient/.nuget/packages/runtime.native.system/4.3.0/runtime.native.system.4.3.0.nupkg.sha512",
     "/home/rootquotient/.nuget/packages/swashbuckle.aspnetcore/6.2.2/swashbuckle.aspnetcore.6.2.2.nupkg.sha512",
     "/home/rootquotient/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.2/swashbuckle.aspnetcore.swagger.6.2.2.nupkg.sha512",
@@ -70,6 +71,7 @@
     "/home/rootquotient/.nuget/packages/system.componentmodel.primitives/4.3.0/system.componentmodel.primitives.4.3.0.nupkg.sha512",
     "/home/rootquotient/.nuget/packages/system.componentmodel.typeconverter/4.3.0/system.componentmodel.typeconverter.4.3.0.nupkg.sha512",
     "/home/rootquotient/.nuget/packages/system.configuration.configurationmanager/4.7.0/system.configuration.configurationmanager.4.7.0.nupkg.sha512",
+    "/home/rootquotient/.nuget/packages/system.console/4.3.1/system.console.4.3.1.nupkg.sha512",
     "/home/rootquotient/.nuget/packages/system.diagnostics.debug/4.3.0/system.diagnostics.debug.4.3.0.nupkg.sha512",
     "/home/rootquotient/.nuget/packages/system.diagnostics.diagnosticsource/5.0.1/system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512",
     "/home/rootquotient/.nuget/packages/system.diagnostics.tools/4.3.0/system.diagnostics.tools.4.3.0.nupkg.sha512",

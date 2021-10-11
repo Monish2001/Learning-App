@@ -4,6 +4,6 @@ namespace Learning_App
 {
     public interface IJwtAuth
     {
-        string Authentication(string username, string password);
+        string Authentication(string mobileno, int otp);
     }
 }

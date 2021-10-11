@@ -46,7 +46,7 @@ namespace Learning_App
                 )
             );
             services.AddControllers();
-            var key = "RootQuotient";
+            var key = "This is secret RootQuotient key";
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

@@ -19,8 +19,9 @@ namespace Learning_App.Models.Serializer
         [Required]
         public string Email {get; set;}
         [Required]
-        public DateTime DOB {get; set;}
-
+        // public DateTime DOB {get; set;}
+        public long Dob {get; set;}
+        // public int OtpId {get; set;}
         
     }
 
@@ -34,7 +35,8 @@ namespace Learning_App.Models.Serializer
                 Email = sign_up.Email,
                 MobileNo = sign_up.MobileNo,
                 FullName = sign_up.FullName,
-                DOB = sign_up.DOB
+                Dob = sign_up.Dob,
+                // OtpId = sign_up.Otp.OtpId
             };
             return s;
         }

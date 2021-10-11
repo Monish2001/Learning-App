@@ -12,9 +12,11 @@ namespace Learning_App.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public DateTime TotalDuration { get; set; }
+        // public DateTime TotalDuration { get; set; }
+        public long Totalduration {get; set;}
         [Required]
-        public DateTime CompletedDuration { get; set; }
+        // public DateTime CompletedDuration { get; set; }
+        public long Completeduration {get; set;}
 
         public Contents Content {get; set;}
         public Students Student {get;set;}        

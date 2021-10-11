@@ -13,7 +13,7 @@ namespace Learning_App.Models.Serializer
         [Required]
         public string MobileNo {get; set;}
         [Required]
-        public string Otp {get; set;}
+        public int Otp {get; set;}
     }
 
 }

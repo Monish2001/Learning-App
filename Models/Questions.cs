@@ -16,7 +16,8 @@ namespace Learning_App.Models
         [Required]
         public int MaxCredit { get; set; }
         [Required]
-        public DateTime TimeLimit {get;set;}
+        // public DateTime TimeLimit {get;set;}
+        public long Timelimit {get; set;}
 
         public Excercises Excercise {get; set;}
         public ICollection<Options> Option {get; set;}
