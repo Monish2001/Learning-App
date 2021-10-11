@@ -22,7 +22,6 @@ namespace Learning_App.Models
 
         public StudentEnrollments StudentEnrollment {get; set;}
         public OTP Otp {get; set;}
-        // public TrackVideos TrackVideo {get; set;}
         public Classes Class {get; set;}
         public ICollection<Sessions> Session {get; set;}
     

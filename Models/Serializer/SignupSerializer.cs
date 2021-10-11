@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
+using Microsoft.AspNetCore.Mvc;
+
+
+namespace Learning_App.Models.Serializer
+{
+    public class Signup
+    {
+        public string Id {get; set;}
+        [Required]
+        public string FullName {get; set;}
+        [Required]
+        public string MobileNo {get; set;}
+        [Required]
+        public string Email {get; set;}
+        [Required]
+        public DateTime DOB {get; set;}
+
+        
+    }
+
+    public class SignupRequestRoot{
+        public Signup sign_up {get; set;}
+
+        public Students createStudentObject()
+        {
+            Students s = new Students
+            {
+                Email = sign_up.Email,
+                MobileNo = sign_up.MobileNo,
+                FullName = sign_up.FullName,
+                DOB = sign_up.DOB
+            };
+            return s;
+        }
+    }
+
+    
+
+}
