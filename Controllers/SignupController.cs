@@ -26,7 +26,7 @@ namespace Learning_App.Controllers
         }
 
         [HttpPost]
-        [Route("api/signup")]
+        [Route("api/v1/signup")]
         public IActionResult Signup([FromForm]SignupRequestRoot s_r)    
         {    
             Students s = s_r.createStudentObject();

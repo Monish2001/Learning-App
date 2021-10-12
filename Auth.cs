@@ -3,6 +3,16 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;
+using System.Data;
+
+
+// private readonly LearningAppDbContext _db;
+    
+//         public SignupController(LearningAppDbContext db)    
+//         {    
+//             // _config = config;
+//             _db = db;
+//         }
 
 namespace Learning_App
 {
@@ -17,6 +27,7 @@ namespace Learning_App
         }
         public string Authentication(string mobileno, int otp)
         {
+
             if (!(mobileno.Equals(mobileno) || otp.Equals(otp)))
             {
                 return null;
