@@ -15,11 +15,11 @@ namespace Learning_App.Controllers
 {   
     [Authorize]
     [ApiController]    
-    public class LoginController : Controller    
+    public class AuthenticationController : Controller    
     {
         private readonly IJwtAuth jwtAuth;
 
-        public LoginController(IJwtAuth jwtAuth)
+        public AuthenticationController(IJwtAuth jwtAuth)
         {
             this.jwtAuth = jwtAuth;
         }
@@ -28,9 +28,9 @@ namespace Learning_App.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("api/v1/login")]
-        public IActionResult POST([FromForm]Login login)
+        public IActionResult POST([FromForm]Authentication authentication)
         {
-            var token = jwtAuth.Authentication(login.MobileNo, login.Otp);
+            var token = jwtAuth.GenerateToken(authentication.MobileNo, authentication.Otp);
             if (token == null)
                 return Unauthorized();
             return Ok(token);

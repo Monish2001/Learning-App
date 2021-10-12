@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Learning_App.Models.Serializer
 {
-    public class Login
+    public class Authentication
     {
         [Required]
         public string MobileNo {get; set;}

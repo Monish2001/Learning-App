@@ -25,7 +25,7 @@ namespace Learning_App
         {
             this.key = key;
         }
-        public string Authentication(string mobileno, int otp)
+        public string GenerateToken(string mobileno, int otp)
         {
 
             if (!(mobileno.Equals(mobileno) || otp.Equals(otp)))
