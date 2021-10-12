@@ -18,12 +18,16 @@ namespace Learning_App.Models
         [Required]
         public string FullName{ get; set; }
         [Required]
-        public DateTime DOB { get; set; }
+        // public DateTime DOB { get; set; }
+        public long Dob {get; set;}
+
+        // public int? StudentEnrollmentId {get; set;}
+        // public int ClassId {get; set;}
 
         public StudentEnrollments StudentEnrollment {get; set;}
-        public OTP Otp {get; set;}
-        // public Classes Class {get; set;}
-
+        // public OTP Otp {get; set;}
+        public Classes Class {get; set;}
+        public ICollection<Sessions> Session {get; set;}
     
     }
 }

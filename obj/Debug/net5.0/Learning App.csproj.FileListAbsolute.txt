@@ -27,7 +27,6 @@
 /home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.IdentityModel.Tokens.dll
 /home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.OpenApi.dll
-/home/rootquotient/Learning App/bin/Debug/net5.0/Newtonsoft.Json.dll
 /home/rootquotient/Learning App/bin/Debug/net5.0/Swashbuckle.AspNetCore.Swagger.dll
 /home/rootquotient/Learning App/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /home/rootquotient/Learning App/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -59,3 +58,5 @@
 /home/rootquotient/Learning App/obj/Debug/net5.0/Learning App.genruntimeconfig.cache
 /home/rootquotient/Learning App/bin/Debug/net5.0/Humanizer.dll
 /home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Design.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/rootquotient/Learning App/bin/Debug/net5.0/Newtonsoft.Json.dll
