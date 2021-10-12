@@ -34,36 +34,13 @@ namespace Learning_App.Controllers
             _db.Students.Add(s);
             _db.SaveChanges();
             // Console.WriteLine(s.Id);
-            
-            OTP OtpObj = GenerateOTP(s);
+            GenerateOTP gOtp = new GenerateOTP();
+            OTP OtpObj = gOtp.GenerateOtp(s,_db);
             SignupResponse responseObj = new SignupResponse(){
                 message = "User created successfully",
                 otp_id = OtpObj.Id
             };
             return Ok(responseObj.otp_id);
-        }
-
-        public OTP GenerateOTP(Students s)
-        {
-            int StudentId = s.Id;
-            RandomNumber rn = new RandomNumber();
-            int Otp = rn.GenerateRandomNo();
-
-            // long Generatedtime = 1633973956;
-            var Generatedtime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
-
-            
-            var OtpObj = new OTP
-            {
-                StudentId = StudentId,
-                Otp = Otp,
-                Generatedtime = Generatedtime
-            };
-
-            _db.OTP.Add(OtpObj);
-            _db.SaveChanges();
-
-            return OtpObj;
         }
     }
 }
