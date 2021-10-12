@@ -29,62 +29,36 @@ namespace Learning_App.Controllers
         [Route("api/signup")]
         public IActionResult Signup([FromForm]SignupRequestRoot s_r)    
         {    
-            // Debug.WriteLine("inside signup");
-            // OTP OtpObj = GenerateOTP();
-            // int OtpId = OtpObj.Id;
-
-            // Console.WriteLine(OtpId);
-            // Debug.WriteLine(OtpId);
-            // s_r.OtpId = OtpId;
             Students s = s_r.createStudentObject();
-            // s.OtpId = OtpId;
-            // s.Otp.Id = OtpId;
-            // s.Otp.Otp = OtpObj.Otp;
-            // s.Otp.Generatedtime = OtpObj.Generatedtime;
-            // Console.WriteLine(s.Otp.Id);
+
             _db.Students.Add(s);
             _db.SaveChanges();
             // Console.WriteLine(s.Id);
-
-            string strng1 = string.Format("Success");
-            return Ok(strng1);
+            
+            OTP OtpObj = GenerateOTP(s);
+            SignupResponse responseObj = new SignupResponse(){
+                message = "User created successfully",
+                otp_id = OtpObj.Id
+            };
+            return Ok(responseObj.otp_id);
         }
 
-        public OTP GenerateOTP()
+        public OTP GenerateOTP(Students s)
         {
-            // System.Guid OTPuuid = System.Guid.NewGuid();
-            // string OTPuuidAsString = OTPuuid.ToString();
-            // Debug.WriteLine("inside otp gene");
-            // RandomNumber rn = null;
+            int StudentId = s.Id;
             RandomNumber rn = new RandomNumber();
             int Otp = rn.GenerateRandomNo();
 
-            // DateTime GeneratedTime = DateTime(2000-08-09 00:00:00);
-            // DateTime GeneratedTime = new DateTime(2000, 08, 08, 00, 00, 00);
-            // DateTime hardcodeValue = new DateTime(yearInt, monthInt, dayInt, hourInt, minuteInt, secondInt);
-            long Generatedtime = 1633973956;
-            // OTPs OtpObj = new OTPs();
+            // long Generatedtime = 1633973956;
+            var Generatedtime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+
             
-            
-
-            // OTPs OtpObj = new OTPs();
-
-            // OtpObj.Id = OTPuuidAsString;
-            // OtpObj.Otp = Otp;
-            // OtpObj.Generatedtime = Generatedtime;
-
-            // OtpRequestRoot OtpObj = new OtpRequestRoot();
-
             var OtpObj = new OTP
             {
+                StudentId = StudentId,
                 Otp = Otp,
                 Generatedtime = Generatedtime
             };
-
-            // string jsonString = JsonSerializer.Serialize(OtpObj);
-            // string jsonString = JsonConvert.SerializeOnbject(OtpObj);
-            // JObject json = JObject.Parse(jsonString);
-            // OtpRequestRoot o = OtpRequestRoot.createOTP();
 
             _db.OTP.Add(OtpObj);
             _db.SaveChanges();

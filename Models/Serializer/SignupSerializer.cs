@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
+using Learning_App.Models;
 
 
 namespace Learning_App.Models.Serializer
@@ -41,6 +42,25 @@ namespace Learning_App.Models.Serializer
             return s;
         }
     }
+
+    public class SignupResponse
+    {
+        public string message;
+        public int otp_id;
+    }
+
+    // public class SignupResponseResult{
+    //     public SignupResponse sign_up{get; set;}
+
+    //     public SignupResponse result(OTP OtpObj){
+    //         SignupResponse res = new SignupResponse
+    //         {
+    //             message = sign_up.message;
+    //             otp_id = OtpObj.Id;
+    //         }
+    //         return res;
+    //     }
+    // }
 
     
 

@@ -21,8 +21,8 @@ namespace Learning_App.Models
         // public DateTime DOB { get; set; }
         public long Dob {get; set;}
 
-        public int? StudentEnrollmentId {get; set;}
-        public int ClassId {get; set;}
+        // public int? StudentEnrollmentId {get; set;}
+        // public int ClassId {get; set;}
 
         public StudentEnrollments StudentEnrollment {get; set;}
         // public OTP Otp {get; set;}
