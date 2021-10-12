@@ -18,6 +18,9 @@ namespace Learning_App.Models
         // public DateTime CompletedDuration { get; set; }
         public long Completeduration {get; set;}
 
+        // public int StudentId {get; set;}
+        // public int ContentId {get; set;}
+
         public Contents Content {get; set;}
         public Students Student {get;set;}        
         

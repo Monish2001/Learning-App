@@ -16,6 +16,8 @@ namespace Learning_App.Models
         [Required]
         public bool IsCorrect { get; set; }
 
+        // public int QuestionId {get; set;}
+
         public Questions Question {get; set;}
         
         

@@ -17,6 +17,8 @@ namespace Learning_App.Models
 
         public bool Status {get; set;}
 
+        // public int StudentId {get;set;}
+
         public Students Student {get; set;}
         
     }

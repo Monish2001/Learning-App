@@ -30,18 +30,21 @@ namespace Learning_App.Controllers
         public IActionResult Signup([FromForm]SignupRequestRoot s_r)    
         {    
             // Debug.WriteLine("inside signup");
-            OTP OtpObj = GenerateOTP();
-            int OtpId = OtpObj.Id;
+            // OTP OtpObj = GenerateOTP();
+            // int OtpId = OtpObj.Id;
 
-            Console.WriteLine(OtpId);
+            // Console.WriteLine(OtpId);
             // Debug.WriteLine(OtpId);
             // s_r.OtpId = OtpId;
             Students s = s_r.createStudentObject();
             // s.OtpId = OtpId;
             // s.Otp.Id = OtpId;
+            // s.Otp.Otp = OtpObj.Otp;
+            // s.Otp.Generatedtime = OtpObj.Generatedtime;
             // Console.WriteLine(s.Otp.Id);
             _db.Students.Add(s);
             _db.SaveChanges();
+            // Console.WriteLine(s.Id);
 
             string strng1 = string.Format("Success");
             return Ok(strng1);

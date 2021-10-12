@@ -16,6 +16,8 @@ namespace Learning_App.Models
         
         public string logo {get; set; }
 
+        // public int SubjectId {get; set;}
+
         public Subjects Subject {get; set;}
         public ICollection<Contents> Content {get; set;}
         public ICollection<Excercises> Excercise {get; set;}

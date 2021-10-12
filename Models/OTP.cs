@@ -17,7 +17,9 @@ namespace Learning_App.Models
         [Required]
         public int Otp { get; set; }
         
-        // public Students Student{ get; set; }
+        public int StudentId {get; set;}
+
+        public Students Student{ get; set; }
 
     }
 }

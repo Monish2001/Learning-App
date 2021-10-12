@@ -13,6 +13,9 @@ namespace Learning_App.Models
         public int Id { get; set; }
         
         public bool IsViewed { get; set; }
+
+        // public int ContentId {get; set;}
+        // public int StudentId {get; set;}
         
         public Contents Content {get; set;}
         public Students Student {get;set;}

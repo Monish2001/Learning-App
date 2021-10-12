@@ -19,6 +19,8 @@ namespace Learning_App.Models
         // public DateTime TimeLimit {get;set;}
         public long Timelimit {get; set;}
 
+        // public int ExcerciseId {get; set;}
+
         public Excercises Excercise {get; set;}
         public ICollection<Options> Option {get; set;}
     }

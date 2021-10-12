@@ -13,6 +13,8 @@ namespace Learning_App.Models
         public int Id { get; set; }
         [Required]
         public string Title { get; set; }
+
+        // public int BoardId {get; set;}
         
         public Boards Board { get; set; }
         public ICollection<StudentEnrollments> StudentEnrollment {get; set;}

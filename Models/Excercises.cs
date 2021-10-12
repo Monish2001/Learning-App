@@ -20,6 +20,7 @@ namespace Learning_App.Models
         public int NoOfQuestions { get; set; }
         [Required]
         public int MaxCredit { get; set; }
+        // public int ChapterId {get; set;}
 
         public Chapters Chapter {get; set;}
         public ICollection<Questions> Question {get;set;}

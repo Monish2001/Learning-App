@@ -14,7 +14,9 @@ namespace Learning_App.Models
         [Required]
         public string SubName { get; set; }
         
+        // public int ClassId {get; set;}
         
+
         public Classes Class {get; set;}
         public ICollection<Chapters> Chapter {get; set;}
     }
