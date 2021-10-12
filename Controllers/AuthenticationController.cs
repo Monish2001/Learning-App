@@ -27,7 +27,7 @@ namespace Learning_App.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("api/v1/login")]
+        [Route("api/v1/auth")]
         public IActionResult POST([FromForm]Authentication authentication)
         {
             var token = jwtAuth.GenerateToken(authentication.MobileNo, authentication.Otp);
