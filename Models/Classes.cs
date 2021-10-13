@@ -14,7 +14,7 @@ namespace Learning_App.Models
         [Required]
         public string Title { get; set; }
 
-        // public int BoardId {get; set;}
+        public int BoardId {get; set;}
         
         public Boards Board { get; set; }
         public ICollection<StudentEnrollments> StudentEnrollment {get; set;}

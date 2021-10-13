@@ -4,14 +4,16 @@ using Learning_App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Learning_App.Migrations
 {
     [DbContext(typeof(LearningAppDbContext))]
-    partial class LearningAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211013070822_AddForeignKeyColumn")]
+    partial class AddForeignKeyColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -282,20 +284,17 @@ namespace Learning_App.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BoardId")
+                    b.Property<int?>("BoardId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClassesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
+                    b.Property<int?>("ClassId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BoardId");
 
-                    b.HasIndex("ClassesId");
+                    b.HasIndex("ClassId");
 
                     b.ToTable("StudentEnrollments");
                 });
@@ -617,15 +616,15 @@ namespace Learning_App.Migrations
                 {
                     b.HasOne("Learning_App.Models.Boards", "Board")
                         .WithMany()
-                        .HasForeignKey("BoardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BoardId");
 
-                    b.HasOne("Learning_App.Models.Classes", null)
+                    b.HasOne("Learning_App.Models.Classes", "Class")
                         .WithMany("StudentEnrollment")
-                        .HasForeignKey("ClassesId");
+                        .HasForeignKey("ClassId");
 
                     b.Navigation("Board");
+
+                    b.Navigation("Class");
                 });
 
             modelBuilder.Entity("Learning_App.Models.Students", b =>

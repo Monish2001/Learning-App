@@ -7,6 +7,7 @@ using Learning_App.Models;
 // using Learning_App.Models.Serializer;
 using Learning_App.Utils;
 // using System.Diagnostics;
+using Learning_App.Controllers;
 using System.Text.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -24,16 +25,19 @@ namespace Learning_App.Controllers
 
         [HttpPost]
         [Route("api/v1/otp-verification")]
-        public IActionResult OtpVerification([FromForm]OtpRequestRoot o_r)    
+        public IActionResult OtpVerification([FromQuery]OtpRequestRoot o_r)    
         {    
-            OTP OtpObj = o_r.OtpObj(_db);
+            OTP OtpObj = o_r.OtpRequest(_db);
             
             if(OtpObj == null)
             {
                 var result = new NotFoundObjectResult(new { message = "404 Not Found"});
                 return result;
             }
-        
+            // return(RedirectToAction("Authenticate", new { message = "hi there!" }));
+            // Authentication auth = new Authentication();
+            // auth.StudentId = OtpObj.StudentId;
+            // return RedirectToAction("Authenticate", auth);
             return Ok(OtpObj);
         }
 

@@ -4,6 +4,6 @@ namespace Learning_App
 {
     public interface IJwtAuth
     {
-        string GenerateToken(string mobileno, int otp);
+        string GenerateToken(int StudentId);
     }
 }

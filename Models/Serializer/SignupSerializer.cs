@@ -48,7 +48,7 @@ namespace Learning_App.Models.Serializer
         public string message;
         public int otp_id;
     }
-
+    
     // public class SignupResponseResult{
     //     public SignupResponse sign_up{get; set;}
 

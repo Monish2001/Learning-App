@@ -4,14 +4,16 @@ using Learning_App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Learning_App.Migrations
 {
     [DbContext(typeof(LearningAppDbContext))]
-    partial class LearningAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211013184302_AddClassidToStudents")]
+    partial class AddClassidToStudents
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -307,7 +309,7 @@ namespace Learning_App.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClassId")
+                    b.Property<int>("ClassId")
                         .HasColumnType("int");
 
                     b.Property<long>("Dob")
@@ -632,7 +634,9 @@ namespace Learning_App.Migrations
                 {
                     b.HasOne("Learning_App.Models.Classes", "Class")
                         .WithMany("Student")
-                        .HasForeignKey("ClassId");
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Learning_App.Models.StudentEnrollments", "StudentEnrollment")
                         .WithMany()

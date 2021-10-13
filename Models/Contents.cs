@@ -18,7 +18,7 @@ namespace Learning_App.Models
         [Required]
         public string ContentType { get; set; }
         
-        // public int ChapterId {get; set;}
+        public int ChapterId {get; set;}
         
         public Chapters Chapter {get; set;}
         public ICollection<Notes> Note {get; set;}

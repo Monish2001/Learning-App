@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Learning_App.Data;
 
 // using AuthTest.API.Middleware; 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -22,7 +23,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 
-using Learning_App.Data;
+// using Learning_App.Data;
 using Learning_App.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -47,6 +48,7 @@ namespace Learning_App
             );
             services.AddControllers();
             var key = "This is secret RootQuotient key";
+            // LearningAppDbContext db = new LearningAppDbContext();
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

@@ -7,9 +7,11 @@ using Learning_App.Models;
 // using Learning_App.Models.Serializer;
 using Learning_App.Utils;
 // using System.Diagnostics;
-using System.Text.Json;
+// using System.Text.Json;
 using Newtonsoft.Json.Linq;
 using System;
+// using System.Collections.Generic;  
+using Newtonsoft.Json;
 
 
 namespace Learning_App.Controllers
@@ -40,7 +42,9 @@ namespace Learning_App.Controllers
                 message = "User created successfully",
                 otp_id = OtpObj.Id
             };
-            return Ok(responseObj.otp_id);
+            string output = JsonConvert.SerializeObject(responseObj);  
+            Console.WriteLine(output); 
+            return Ok(output);
         }
     }
 }

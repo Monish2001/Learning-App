@@ -4,6 +4,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;
 using System.Data;
+using Learning_App.Data;
+using System.Linq;
 
 
 // private readonly LearningAppDbContext _db;
@@ -18,21 +20,19 @@ namespace Learning_App
 {
     public class Auth : IJwtAuth
     {
-        private readonly string mobileno = "8608319422";
-        private readonly int otp = 1234;
+        // private readonly string mobileno = "8608319422";
+        private readonly int StudentId;
         private readonly string key;
+        // private readonly LearningAppDbContext _db;
+
+        // _db = db;
         public Auth(string key)
         {
             this.key = key;
+            // _db = db;
         }
-        public string GenerateToken(string mobileno, int otp)
+        public string GenerateToken(int StudentId)
         {
-
-            if (!(mobileno.Equals(mobileno) || otp.Equals(otp)))
-            {
-                return null;
-            }
-
             // 1. Create Security Token Handler
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -45,9 +45,9 @@ namespace Learning_App
                 Subject = new ClaimsIdentity(
                     new Claim[]
                     {
-                        new Claim(ClaimTypes.Name, mobileno)
+                        new Claim(ClaimTypes.Name, StudentId.ToString())
                     }),
-                Expires = DateTime.UtcNow.AddHours(1),
+                Expires = DateTime.UtcNow.AddHours(23),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
             };
