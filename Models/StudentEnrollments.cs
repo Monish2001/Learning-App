@@ -11,9 +11,13 @@ namespace Learning_App.Models
     {
         [Key]
         public int Id { get; set; }
+
+        public int StudentId {get; set;}
+        public int BoardId {get; set;}
+        // public int? ClassId {get;set;}
         
-        public Students Student { get; set; }
+        // public Students Student { get; set; }
         public Boards Board { get; set; }
-        public Classes Class { get; set; }
+        // public Classes Class { get; set; }
     }
 }
