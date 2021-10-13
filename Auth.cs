@@ -47,7 +47,7 @@ namespace Learning_App
                     {
                         new Claim(ClaimTypes.Name, StudentId.ToString())
                     }),
-                Expires = DateTime.UtcNow.AddHours(1),
+                Expires = DateTime.UtcNow.AddHours(23),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
             };
