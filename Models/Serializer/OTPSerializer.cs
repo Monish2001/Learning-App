@@ -26,7 +26,7 @@ namespace Learning_App.Models.Serializer
     public class OtpRequestRoot{
         public OTPs Obj {get; set;}
 
-        public OTP OtpObj(LearningAppDbContext _db)
+        public OTP OtpRequest(LearningAppDbContext _db)
         {
             
             OTP o = new OTP

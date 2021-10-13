@@ -42,7 +42,7 @@ namespace Learning_App.Controllers
             OTP OtpObj = gOtp.GenerateOtp(s,_db);
 
             LoginResponse responseObj = new LoginResponse(){
-                message = "User created successfully",
+                message = "Otp Generated",
                 otp_id = OtpObj.Id
             };
             return Ok(responseObj.otp_id);

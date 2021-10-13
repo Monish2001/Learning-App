@@ -11,13 +11,15 @@ namespace Learning_App.Models
     {
         [Key]
         public int Id { get; set; }
+
+        public string JwtToken {get; set;}
         
         // public DateTime CreatedTime {get; set;}
         public long Createdtime {get; set;}
 
         public bool Status {get; set;}
 
-        // public int StudentId {get;set;}
+        public int StudentId {get;set;}
 
         public Students Student {get; set;}
         
