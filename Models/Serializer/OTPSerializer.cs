@@ -1,16 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Text;  
-// using System.Web.Script.Serialization;
-using Microsoft.AspNetCore.Mvc;
-using Learning_App.Models;
 using Learning_App.Data;
-using Newtonsoft.Json.Linq;
-using System.Text.Json;
 
 namespace Learning_App.Models.Serializer
 {
