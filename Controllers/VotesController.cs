@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;    
 using Microsoft.AspNetCore.Mvc; 
 using System;        
-using System.Security.Claims;    
+using System.Security.Claims;
 using System.Collections.Generic;
 using System.Linq;
 using Learning_App.Data;
@@ -20,9 +20,9 @@ namespace Learning_App.Controllers
         }
         
         [Authorize]
-        [HttpGet]
-        [Route("api/v1/contents/{content_id}/vote")]
-        public IActionResult VoteContent([FromRoute] int content_id, [FromForm] VoteRequest reqObj)
+        [HttpPost]
+        [Route("api/v1/chapters/{chapter_id}/contents/{content_id}/vote")]
+        public IActionResult VoteContent([FromRoute] int content_id, [FromRoute] int chapter_id, [FromForm] VoteRequest reqObj)
         {
             // To get the student id from jwt token
             var currentUser = HttpContext.User;
@@ -43,17 +43,36 @@ namespace Learning_App.Controllers
             {
                 _db.Votes.Add(voteObj);
                 _db.SaveChanges();
-                string output = JsonConvert.SerializeObject(voteObj);
+                var updatedObj = _db.Votes.Where(v => v.StudentId == StudentId && v.ContentId == content_id).ToList();
+                string output = VoteResponse(updatedObj);
                 return Ok(output);
             }
             else{
                 var UpdateVote = _db.Votes.Where(v => v.StudentId == StudentId && v.ContentId == content_id).ToList();
                 UpdateVote.ForEach(v => v.IsVoted = reqObj.vote);
                 _db.SaveChanges();
-                string output = JsonConvert.SerializeObject(UpdateVote);
+
+                string output = VoteResponse(UpdateVote);
                 return Ok(output);
             }
             // return NotFound();
+        }
+
+        public string VoteResponse(List<Votes> VoteObj){
+
+            Vote VoteCustomObject = new Vote(){
+                StudentId = VoteObj[0].StudentId,
+                ContentId = VoteObj[0].ContentId,
+                IsVoted = VoteObj[0].IsVoted,
+                VotedTime = VoteObj[0].Votedtime
+            };
+
+            VoteResponse VoteReponseObj = new VoteResponse(){
+                VoteObj = VoteCustomObject,
+                Message = "Voted Successfully"
+            };
+            string output = JsonConvert.SerializeObject(VoteReponseObj);
+            return output;
         }
     }
 }
