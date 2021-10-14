@@ -18,8 +18,8 @@ namespace Learning_App.Models
         // public DateTime EndTime { get; set; }
         public long Endtime {get; set;}
 
-        // public int ExcerciseId {get; set;}
-        // public int StudentId {get; set;}
+        public int ExcerciseId {get; set;}
+        public int StudentId {get; set;}
 
         public Excercises Excercise {get; set;}
         public Students Student {get;set;}        

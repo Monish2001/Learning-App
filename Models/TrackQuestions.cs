@@ -18,11 +18,11 @@ namespace Learning_App.Models
         public int MarksObtained {get; set;}
 
         // public int QuestionId {get; set;}
-        // public int StudentId {get; set;}
-        // public int TrackExcerciseId {get; set;}
-        // public int OptionId {get; set;}
+        public int StudentId {get; set;}
+        public int TrackExcerciseId {get; set;}
+        public int OptionId {get; set;}
 
-        public Questions Question {get; set;}
+        // public Questions Question {get; set;}
         public Students Student {get; set;}
         public TrackExcercises TrackExcercise {get;set;}        
         public Options Option {get;set;}     
