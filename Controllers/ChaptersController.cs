@@ -7,7 +7,6 @@ using System.Linq;
 using Learning_App.Data;
 using Newtonsoft.Json;
 
-    
 namespace Learning_App.Controllers    
 {   
     public class ChaptersController : Controller    
