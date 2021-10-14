@@ -39,11 +39,11 @@ namespace Learning_App.Controllers
                 ListOfOptions.Add(responseObj);
             }
 
-            OptionResponse optionResponseObj = new OptionResponse(){
-                Options = ListOfOptions
-            };
+            // OptionResponse optionResponseObj = new OptionResponse(){
+            //     Options = ListOfOptions
+            // };
 
-            string output = JsonConvert.SerializeObject(optionResponseObj);
+            string output = JsonConvert.SerializeObject(ListOfOptions);
             return output;
         }
     }
