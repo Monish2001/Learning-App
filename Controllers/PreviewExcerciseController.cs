@@ -1,60 +1,114 @@
-// using Microsoft.AspNetCore.Authorization;    
-// using Microsoft.AspNetCore.Mvc;    
-// using System.Collections.Generic;
-// using System.Linq;
-// using Learning_App.Data;
-// using Learning_App.Models;
-// using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;    
+using Microsoft.AspNetCore.Mvc;    
+using System.Collections.Generic;
+using System.Linq;
+using Learning_App.Data;
+using System.Security.Claims;    
+using Learning_App.Models;
+using Newtonsoft.Json;
+using System;
 
-// namespace Learning_App.Controllers    
-// {   
-//     public class PreviewExcerciseController : Controller    
-//     {
-//         private readonly LearningAppDbContext _db;
+namespace Learning_App.Controllers    
+{   
+    public class PreviewExcerciseController : Controller    
+    {
+        private readonly LearningAppDbContext _db;
     
-//         public PreviewExcerciseController(LearningAppDbContext db)    
-//         {    
-//             _db = db;
-//         }
+        public PreviewExcerciseController(LearningAppDbContext db)    
+        {    
+            _db = db;
+        }
         
-//         [Authorize]
-//         [HttpGet]
-//         [Route("api/v1/excercises/{excercise_id}/attempts/{attempt_id}")]
-//         public IActionResult ExcercisePreview([FromRoute] int excercise_id,[FromRoute] int attempt_id)
-//         {            
-//             var questionList = _db.Questions.Where(q => q.ExcerciseId == excercise_id).ToList();
+        [Authorize]
+        [HttpGet]
+        [Route("api/v1/excercises/{excercise_id}/attempts/{attempt_id}")]
+        public IActionResult ExcercisePreview([FromRoute] int excercise_id,[FromRoute] int attempt_id)
+        {            
+            var currentUser = HttpContext.User;
+            
+            var studentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+            int studentId = Int32.Parse(studentIdFromJWT);
+            
+            var trackQuesObj = _db.TrackQuestions.Where(tq => tq.TrackExcerciseId == attempt_id && tq.StudentId == studentId).ToList();
+            int markedForReviewCount = 0;
 
-//             if(questionList.Count() == 0)
-//             {
-//                 NoResponseFound noResponseFoundObj = new NoResponseFound{
-//                     Message = "Question not found for this particular excercise"
-//                 };
-//                 string noResponseFoundResponse = JsonConvert.SerializeObject(noResponseFoundObj);
-//                 return Ok(noResponseFoundResponse);
-//             }
+            List<QuestionReport> listOfQuestionsReport = new List<QuestionReport>();
+            
+            for (var i = 0; i < trackQuesObj.Count; i++)
+            {
+                int quesId = trackQuesObj[i].QuestionId;
+                int? selectedOptionId = trackQuesObj[i].OptionId;
+                bool isMarkedForReview = trackQuesObj[i].MarkedForReview;
+                string options = OptionsList(quesId);
 
-//             List<Question> ListOfQuestion = new List<Question>();
-//             // OptionsController optionsObj = new OptionsController(LearningAppDbContext db);
-//             for (var i = 0; i < questionList.Count; i++)
-//             {
-//                 Question responseObj = new Question(){
-//                     Id = questionList[i].Id,
-//                     ExcerciseId = questionList[i].ExcerciseId,
-//                     QuestionStr = questionList[i].Question,
-//                     Timelimit = questionList[i].Timelimit,
-//                     MaxCredit = questionList[i].MaxCredit,
-//                     Options = "options"
-//                 };
+                var quesObj = _db.Questions.Where(q => q.Id == quesId).ToList();
+                string question = quesObj[0].Question;
+
+                QuestionReport questionReportObj = new QuestionReport(){
+                    QuestionId = quesId,
+                    QuestionStr = question,
+                    IsMarkedForReview = isMarkedForReview,
+                    Options = options,
+                    SelectedOptionId = selectedOptionId
+                };
+
+                if(isMarkedForReview == true){
+                    markedForReviewCount += 1;
+                }
+
+                listOfQuestionsReport.Add(questionReportObj);
+            }
+
+            var excerciseObj = _db.Excercises.Where(e => e.Id == excercise_id).ToList();
+            int chapterId = excerciseObj[0].ChapterId;
+
+            var chapterObj = _db.Chapters.Where(c => c.Id == chapterId).ToList();
+            string chapterName = chapterObj[0].Name;
+
+            int totalQuestion = _db.Questions.Where(q => q.ExcerciseId == excercise_id).Count();
+
+            int attemptedQuestionsCount = trackQuesObj.Count();
+            int unAnsweredCount = totalQuestion - attemptedQuestionsCount;
+
+            PreviewReport previewReportObj = new PreviewReport{
+                ChapterId = chapterId,
+                ChapterName = chapterName,
+                AttemptedQuestions = attemptedQuestionsCount,
+                UnAnswered = unAnsweredCount,
+                MarkedForReview = markedForReviewCount
+            };
+
+            Preview previewObj = new Preview{
+                QuestionReportList = listOfQuestionsReport,
+                TotalReportPreview = previewReportObj
+            };
+            string output = JsonConvert.SerializeObject(previewObj);
+            return Ok(output);
+        }
+
+        public string OptionsList(int question_id)
+        {            
+            var optionsList = _db.Options.Where(o => o.QuestionId == question_id).ToList();
+            Console.WriteLine(question_id);
+            if(optionsList.Count() == 0)
+            {
+                return null;
+            }
+
+            List<Option> ListOfOptions = new List<Option>();
+            
+            for (var i = 0; i < optionsList.Count; i++)
+            {
+                Option responseObj = new Option(){
+                    Id = optionsList[i].Id,
+                    QuestionId = optionsList[i].QuestionId,
+                    OptionValue = optionsList[i].OptionValue,
+                };
                 
-//                 ListOfQuestion.Add(responseObj);
-//             }
-
-//             QuestionResponse optionResponseObj = new QuestionResponse(){
-//                 Questions = ListOfQuestion
-//             };
-
-//             string output = JsonConvert.SerializeObject(optionResponseObj);
-//             return Ok(output);
-//         }
-//     }
-// }
+                ListOfOptions.Add(responseObj);
+            }
+            string output = JsonConvert.SerializeObject(ListOfOptions);
+            return output;
+        }
+    }
+}

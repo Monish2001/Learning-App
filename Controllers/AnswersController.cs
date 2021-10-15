@@ -45,7 +45,7 @@ namespace Learning_App.Controllers
             _db.TrackQuestions.Add(inputObj);
             _db.SaveChanges(); 
             
-            string output = AnswerControllerResponse("Added Successfully", question_id, StudentId);
+            string output = AnswerControllerResponse("Added Successfully", question_id, StudentId, attempt_id);
             return Ok(output);
             
         }
@@ -66,7 +66,7 @@ namespace Learning_App.Controllers
             _db.SaveChanges();
 
     
-            string output = AnswerControllerResponse("Updated Successfully", question_id, StudentId);
+            string output = AnswerControllerResponse("Updated Successfully", question_id, StudentId, attempt_id);
             return Ok(output);
         }
 
@@ -82,9 +82,9 @@ namespace Learning_App.Controllers
         //     }
         // }
 
-        public string AnswerControllerResponse(string message, int question_id, int StudentId)
+        public string AnswerControllerResponse(string message, int question_id, int StudentId, int attempt_id)
         {
-            var trackQuesObj = _db.TrackQuestions.Where(tq => tq.QuestionId == question_id && tq.StudentId == StudentId).ToList();
+            var trackQuesObj = _db.TrackQuestions.Where(tq => tq.StudentId == StudentId && tq.QuestionId == question_id && tq.TrackExcerciseId == attempt_id).ToList();
             bool isMarkedForReview = trackQuesObj[0].MarkedForReview;
             int? optionId = trackQuesObj[0].OptionId;
 
