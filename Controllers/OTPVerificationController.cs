@@ -1,16 +1,7 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using Learning_App.Models.Serializer;
 using Learning_App.Data;
 using Learning_App.Models;
-// using Learning_App.Models.Serializer;
-using Learning_App.Utils;
-// using System.Diagnostics;
-using Learning_App.Controllers;
-using System.Text.Json;
-using Newtonsoft.Json.Linq;
-using System;
 
 namespace Learning_App.Controllers
 {

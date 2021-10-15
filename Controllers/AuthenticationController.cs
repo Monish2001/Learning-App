@@ -1,19 +1,10 @@
 using Microsoft.AspNetCore.Authorization;    
 using Microsoft.AspNetCore.Mvc;    
-using Microsoft.Extensions.Configuration;    
-using Microsoft.IdentityModel.Tokens;    
-using System;    
-using System.IdentityModel.Tokens.Jwt;    
-using System.Security.Claims;    
-using System.Text;
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Learning_App.Data;
 using Learning_App.Models.Serializer;
 using Learning_App.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
     
 namespace Learning_App.Controllers    
 {   

@@ -14,12 +14,12 @@ namespace Learning_App.Models
         
         [Required]
         // public DateTime CreatedTime {get;set;}
-        public long Createdtime {get; set;}
+        public long Votedtime {get; set;}
 
-        public bool IsVoted { get; set; }
+        public bool? IsVoted { get; set; }
 
-        // public int StudentId {get; set;}
-        // public int ContentId {get; set;}
+        public int StudentId {get; set;}
+        public int ContentId {get; set;}
         
         public Contents Content {get; set;}
         public Students Student {get;set;}

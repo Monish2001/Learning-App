@@ -16,7 +16,7 @@ namespace Learning_App.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.10")
+                .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Learning_App.Models.Boards", b =>
@@ -53,11 +53,8 @@ namespace Learning_App.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SubjectId")
+                    b.Property<int>("SubjectId")
                         .HasColumnType("int");
-
-                    b.Property<string>("logo")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -344,11 +341,14 @@ namespace Learning_App.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClassId")
+                    b.Property<int>("ClassId")
                         .HasColumnType("int");
 
                     b.Property<string>("SubName")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("logo")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -368,13 +368,13 @@ namespace Learning_App.Migrations
                     b.Property<long>("Endtime")
                         .HasColumnType("bigint");
 
-                    b.Property<int?>("ExcerciseId")
+                    b.Property<int>("ExcerciseId")
                         .HasColumnType("int");
 
                     b.Property<long>("Starttime")
                         .HasColumnType("bigint");
 
-                    b.Property<int?>("StudentId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -393,13 +393,13 @@ namespace Learning_App.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ContentId")
+                    b.Property<int>("ContentId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsViewed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("StudentId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -418,36 +418,26 @@ namespace Learning_App.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Attempted")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("MarkedForReview")
                         .HasColumnType("bit");
-
-                    b.Property<int>("MarksObtained")
-                        .HasColumnType("int");
 
                     b.Property<int?>("OptionId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("QuestionId")
+                    b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StudentId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TrackExcerciseId")
+                    b.Property<int>("TrackExcerciseId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OptionId");
 
-                    b.HasIndex("QuestionId");
-
                     b.HasIndex("StudentId");
-
-                    b.HasIndex("TrackExcerciseId");
 
                     b.ToTable("TrackQuestions");
                 });
@@ -462,10 +452,10 @@ namespace Learning_App.Migrations
                     b.Property<long>("Completeduration")
                         .HasColumnType("bigint");
 
-                    b.Property<int?>("ContentId")
+                    b.Property<int>("ContentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StudentId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.Property<long>("Totalduration")
@@ -487,17 +477,17 @@ namespace Learning_App.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ContentId")
+                    b.Property<int>("ContentId")
                         .HasColumnType("int");
 
-                    b.Property<long>("Createdtime")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("IsVoted")
+                    b.Property<bool?>("IsVoted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("StudentId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
+
+                    b.Property<long>("Votedtime")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -512,7 +502,9 @@ namespace Learning_App.Migrations
                 {
                     b.HasOne("Learning_App.Models.Subjects", "Subject")
                         .WithMany("Chapter")
-                        .HasForeignKey("SubjectId");
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Subject");
                 });
@@ -647,7 +639,9 @@ namespace Learning_App.Migrations
                 {
                     b.HasOne("Learning_App.Models.Classes", "Class")
                         .WithMany("Subject")
-                        .HasForeignKey("ClassId");
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Class");
                 });
@@ -656,11 +650,15 @@ namespace Learning_App.Migrations
                 {
                     b.HasOne("Learning_App.Models.Excercises", "Excercise")
                         .WithMany()
-                        .HasForeignKey("ExcerciseId");
+                        .HasForeignKey("ExcerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Learning_App.Models.Students", "Student")
                         .WithMany()
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Excercise");
 
@@ -671,11 +669,15 @@ namespace Learning_App.Migrations
                 {
                     b.HasOne("Learning_App.Models.Contents", "Content")
                         .WithMany("TrackPdf")
-                        .HasForeignKey("ContentId");
+                        .HasForeignKey("ContentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Learning_App.Models.Students", "Student")
                         .WithMany()
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Content");
 
@@ -688,36 +690,30 @@ namespace Learning_App.Migrations
                         .WithMany()
                         .HasForeignKey("OptionId");
 
-                    b.HasOne("Learning_App.Models.Questions", "Question")
-                        .WithMany()
-                        .HasForeignKey("QuestionId");
-
                     b.HasOne("Learning_App.Models.Students", "Student")
                         .WithMany()
-                        .HasForeignKey("StudentId");
-
-                    b.HasOne("Learning_App.Models.TrackExcercises", "TrackExcercise")
-                        .WithMany()
-                        .HasForeignKey("TrackExcerciseId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Option");
 
-                    b.Navigation("Question");
-
                     b.Navigation("Student");
-
-                    b.Navigation("TrackExcercise");
                 });
 
             modelBuilder.Entity("Learning_App.Models.TrackVideos", b =>
                 {
                     b.HasOne("Learning_App.Models.Contents", "Content")
                         .WithMany()
-                        .HasForeignKey("ContentId");
+                        .HasForeignKey("ContentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Learning_App.Models.Students", "Student")
                         .WithMany()
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Content");
 
@@ -728,11 +724,15 @@ namespace Learning_App.Migrations
                 {
                     b.HasOne("Learning_App.Models.Contents", "Content")
                         .WithMany()
-                        .HasForeignKey("ContentId");
+                        .HasForeignKey("ContentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Learning_App.Models.Students", "Student")
                         .WithMany()
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Content");
 
