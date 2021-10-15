@@ -45,9 +45,9 @@ namespace Learning_App.Controllers
             _db.TrackQuestions.Add(inputObj);
             _db.SaveChanges(); 
             
-
-            // string output = JsonConvert.SerializeObject(optionResponseObj);
-            return Ok();
+            string output = AnswerControllerResponse("Added Successfully", question_id, StudentId);
+            return Ok(output);
+            
         }
 
         [Authorize]
@@ -66,8 +66,8 @@ namespace Learning_App.Controllers
             _db.SaveChanges();
 
     
-            // string output = JsonConvert.SerializeObject(optionResponseObj);
-            return Ok();
+            string output = AnswerControllerResponse("Updated Successfully", question_id, StudentId);
+            return Ok(output);
         }
 
         // public bool CheckAnswer(int question_id, int option_id)
@@ -81,5 +81,34 @@ namespace Learning_App.Controllers
         //         return false;
         //     }
         // }
+
+        public string AnswerControllerResponse(string message, int question_id, int StudentId)
+        {
+            var trackQuesObj = _db.TrackQuestions.Where(tq => tq.QuestionId == question_id && tq.StudentId == StudentId).ToList();
+            bool isMarkedForReview = trackQuesObj[0].MarkedForReview;
+            int? optionId = trackQuesObj[0].OptionId;
+
+            var questionObj = _db.Questions.Where(q => q.Id == question_id).ToList();
+            string question = questionObj[0].Question;
+
+            var optionObj = _db.Options.Where(o => o.Id == optionId).ToList();
+            string option = optionObj[0].OptionValue;
+
+            AnswerResponse answerResponseObj = new AnswerResponse{
+                Question = question,
+                Option = option,
+                OptionId = optionId,
+                IsMarkedForReview = isMarkedForReview
+            };
+
+            Response responseObj = new Response{
+                Message = message,
+                AnswerObj = answerResponseObj
+            };
+
+            string output = JsonConvert.SerializeObject(responseObj);
+            return output;
+        }
+
     }
 }
