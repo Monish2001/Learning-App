@@ -13,6 +13,11 @@ namespace Learning_App.Models.Serializer
         
     }
 
+    public class OtpResponse{
+        public string Message {get; set;}
+        public string Token {get;set;}
+    }
+
     public class OtpRequestRoot{
         public OTPs Obj {get; set;}
 
