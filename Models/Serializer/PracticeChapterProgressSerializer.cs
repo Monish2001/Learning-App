@@ -4,7 +4,7 @@ public class ChaptersProgress{
     public string Name {get; set;}
     public int SubId {get; set;}
     public int TotalExcercise {get; set;}
-    public int CompletionPercentage {get; set;}
+    public double CompletionPercentage {get; set;}
 }
 
 public class ChapterProgressResponse{
