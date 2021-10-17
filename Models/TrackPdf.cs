@@ -12,7 +12,10 @@ namespace Learning_App.Models
         [Key]
         public int Id { get; set; }
         
-        public bool IsViewed { get; set; }
+        // public bool IsViewed { get; set; }
+
+        public int TotalPages {get; set;}
+        public int ViewedPages {get; set;}
 
         public int ContentId {get; set;}
         public int StudentId {get; set;}

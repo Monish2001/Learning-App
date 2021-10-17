@@ -6,10 +6,10 @@ public class Content{
     public string Title { get; set; }
     public string ContentLink{get; set;}
     public string ContentType {get; set;}
-    public int? TotalDuration {get; set;}
-    public int? CompletedDuration {get; set;}
-    public bool? IsPdfViewed {get; set;}
-
+    public long? TotalDuration {get; set;}
+    public long? CompletedDuration {get; set;}
+    public int? PdfTotalPages {get; set;}
+    public int? PdfReadPages {get; set;}
 }
 
 public class ContentCount
