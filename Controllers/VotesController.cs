@@ -55,7 +55,6 @@ namespace Learning_App.Controllers
                 string output = VoteResponse(UpdateVote);
                 return Ok(output);
             }
-            // return NotFound();
         }
 
         public string VoteResponse(List<Votes> VoteObj){

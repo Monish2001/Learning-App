@@ -11,7 +11,7 @@ public class ExcerciseQuestionReport{
 public class Analytics
     {
         public int Score {get; set;}
-        public int AccuracyPercentage {get; set;}
+        public double AccuracyPercentage {get; set;}
         public long TotalDurationInMins {get; set;}
         public int AttemptNo {get; set;}
         public long AttemptedDate {get; set;}

@@ -71,17 +71,19 @@ namespace Learning_App.Controllers
             long excerciseStartTime = trackExcerciseObj[0].Starttime;
             long excerciseEndTime = trackExcerciseObj[0].Endtime;
 
-            int maxCreditForAQues = excerciseObj[0].MaxCredit;
+            int maxCreditForAnExcercise = excerciseObj[0].MaxCredit;
             long timeLimit = excerciseObj[0].Timelimit;
 
 
-            int totalQuestion = _db.Questions.Where(q => q.ExcerciseId == excercise_id).Count();
+            var questionObj = _db.Questions.Where(q => q.ExcerciseId == excercise_id).ToList();
+            int maxCreditForAQues = questionObj[0].MaxCredit;
+            int totalQuestion = questionObj.Count();
 
             int attemptedQuestionsCount = trackQuesObj.Count();
             
 
             int score = correctAnsCount*maxCreditForAQues;
-            int accuracyPercentage = (score/totalQuestion*maxCreditForAQues)*100;
+            double accuracyPercentage = ((double)score/(double)maxCreditForAnExcercise)*100;
             var totalDurationInMins = (excerciseEndTime- excerciseStartTime)/1000;
             int attemptNo = attempt_id;
             long attemptedDate = excerciseStartTime;
