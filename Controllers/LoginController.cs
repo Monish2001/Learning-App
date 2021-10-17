@@ -4,6 +4,7 @@ using Learning_App.Models.Serializer;
 using Learning_App.Data;
 using Learning_App.Models;
 using Learning_App.Utils;
+using Newtonsoft.Json;
  
 namespace Learning_App.Controllers    
 {   
@@ -33,10 +34,11 @@ namespace Learning_App.Controllers
             OTP OtpObj = gOtp.GenerateOtp(s,_db);
 
             LoginResponse responseObj = new LoginResponse(){
-                message = "Otp Generated",
-                otp_id = OtpObj.Id
+                Message = "Otp Generated",
+                OtpId = OtpObj.Id
             };
-            return Ok(responseObj.otp_id);
+            string output = JsonConvert.SerializeObject(responseObj);
+            return Ok(output);
         }
 
         // [HttpPost]

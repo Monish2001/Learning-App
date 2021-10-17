@@ -44,7 +44,10 @@ namespace Learning_App.Controllers
 
                 ListOfChapters.Add(responseObj);
             }
-            string output = JsonConvert.SerializeObject(ListOfChapters);
+            ListChaptersResponse chapterResponseObj = new ListChaptersResponse(){
+                Chapters = ListOfChapters
+            };
+            string output = JsonConvert.SerializeObject(chapterResponseObj);
             return Ok(output);
         }
     }

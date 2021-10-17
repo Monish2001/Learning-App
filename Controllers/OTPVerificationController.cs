@@ -42,7 +42,7 @@ namespace Learning_App.Controllers
                 Token = tokenValue
             }; 
 
-            Console.WriteLine(tokenValue);
+            // Console.WriteLine(tokenValue);
             return Ok(otpResponseObj);
         }
 

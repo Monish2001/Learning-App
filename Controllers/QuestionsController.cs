@@ -10,6 +10,7 @@ namespace Learning_App.Controllers
     public class QuestionsController : Controller    
     {
         private readonly LearningAppDbContext _db;
+        // LearningAppDbContext db;
     
         public QuestionsController(LearningAppDbContext db)    
         {    
@@ -34,7 +35,9 @@ namespace Learning_App.Controllers
             }
 
             List<Question> ListOfQuestion = new List<Question>();
-            // OptionsController optionsObj = new OptionsController(LearningAppDbContext db);
+            
+            // OptionsController optionsObj = new OptionsController(db);
+            
             for (var i = 0; i < questionList.Count; i++)
             {
                 Question responseObj = new Question(){
@@ -43,7 +46,7 @@ namespace Learning_App.Controllers
                     QuestionStr = questionList[i].Question,
                     Timelimit = questionList[i].Timelimit,
                     MaxCredit = questionList[i].MaxCredit,
-                    Options = "options"
+                    Options = OptionsList(questionList[i].Id)
                 };
                 
                 ListOfQuestion.Add(responseObj);
@@ -55,6 +58,30 @@ namespace Learning_App.Controllers
 
             string output = JsonConvert.SerializeObject(optionResponseObj);
             return Ok(output);
+        }
+
+        public string OptionsList(int question_id)
+        {            
+            var optionsList = _db.Options.Where(o => o.QuestionId == question_id).ToList();
+            if(optionsList.Count() == 0)
+            {
+                return null;
+            }
+
+            List<Option> ListOfOptions = new List<Option>();
+            
+            for (var i = 0; i < optionsList.Count; i++)
+            {
+                Option responseObj = new Option(){
+                    Id = optionsList[i].Id,
+                    QuestionId = optionsList[i].QuestionId,
+                    OptionValue = optionsList[i].OptionValue,
+                };
+                
+                ListOfOptions.Add(responseObj);
+            }
+            string output = JsonConvert.SerializeObject(ListOfOptions);
+            return output;
         }
     }
 }

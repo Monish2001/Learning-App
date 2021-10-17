@@ -47,8 +47,10 @@ namespace Learning_App.Controllers
 
                 ListOfClasses.Add(responseObj);
             }
-            string output = JsonConvert.SerializeObject(ListOfClasses);  
-            Console.WriteLine(output);
+            ListClassesResponse classResponseObj = new ListClassesResponse(){
+                Classes = ListOfClasses
+            };
+            string output = JsonConvert.SerializeObject(classResponseObj);
             return Ok(output);
         }
 
@@ -80,9 +82,12 @@ namespace Learning_App.Controllers
                     Id = ClassDetails[0].Id,
                     Title = ClassDetails[0].Title
             };
-
-            string output = JsonConvert.SerializeObject(responseObj);  
+            PostClassResponse classResponseObj = new PostClassResponse(){
+                Class = responseObj
+            };
+            string output = JsonConvert.SerializeObject(classResponseObj);
             return Ok(output);
+            
         }
     }
 }

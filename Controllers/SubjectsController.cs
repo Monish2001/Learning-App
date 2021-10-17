@@ -46,7 +46,10 @@ namespace Learning_App.Controllers
 
                 ListOfSubjects.Add(responseObj);
             }
-            string output = JsonConvert.SerializeObject(ListOfSubjects);
+            ListSubjectsResponse subjectResponseObj = new ListSubjectsResponse(){
+                Subjects = ListOfSubjects
+            };
+            string output = JsonConvert.SerializeObject(subjectResponseObj);
             return Ok(output);
         }
     }

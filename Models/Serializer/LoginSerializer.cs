@@ -10,7 +10,7 @@ namespace Learning_App.Models.Serializer
 
     public class LoginResponse
     {
-        public string message;
-        public int otp_id;
+        public string Message;
+        public int OtpId;
     }
 }

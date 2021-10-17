@@ -41,7 +41,11 @@ namespace Learning_App.Controllers
 
                 ListOfBoards.Add(responseObj);
             }
-            string output = JsonConvert.SerializeObject(ListOfBoards);  
+
+            ListBoardResponse boardResponseObj = new ListBoardResponse{
+                Boards = ListOfBoards
+            };
+            string output = JsonConvert.SerializeObject(boardResponseObj);  
             return Ok(output);
         }
 
@@ -74,7 +78,10 @@ namespace Learning_App.Controllers
                     Logo = BoardDetails[0].Logo
                 };
 
-            string output = JsonConvert.SerializeObject(responseObj);  
+            PostBoardResponse boardResponseObj = new PostBoardResponse{
+                Board = responseObj
+            };
+            string output = JsonConvert.SerializeObject(boardResponseObj);
             return Ok(output);
         }
     }
