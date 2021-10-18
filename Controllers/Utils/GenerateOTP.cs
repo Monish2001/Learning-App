@@ -28,28 +28,6 @@ namespace Learning_App.Utils
             _db.SaveChanges();
 
             return OtpObj;
-
-            // OTP OtpObj = new OTP
-            //     {
-            //         StudentId = StudentId,
-            //         Otp = Otp,
-            //         Generatedtime = Generatedtime
-            //     };
-
-            // var res = _db.OTP.Where(r => r.StudentId == OtpObj.StudentId);
-            // if(res.Count()==0){
-                
-
-            //     _db.OTP.Add(OtpObj);
-            //     _db.SaveChanges();
-            //     return OtpObj;
-            // }
-            // else{
-            //     res.Otp = Otp;
-            //     _db.SaveChanges();
-            //     return OtpObj;
-            // }
-
         }
     }
 }

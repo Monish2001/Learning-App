@@ -28,8 +28,8 @@ namespace Learning_App.Controllers
         {            
             var currentUser = HttpContext.User;
             
-            var StudentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-            int studentId = Int32.Parse(StudentIdFromJWT);
+            var studentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+            int studentId = Int32.Parse(studentIdFromJWT);
 
             var excerciseList = _db.Excercises.Where(e => e.ChapterId == chapter_id).ToList();
 

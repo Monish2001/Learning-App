@@ -47,8 +47,8 @@ namespace Learning_App.Controllers
         {    
             var currentUser = HttpContext.User;
             
-            var StudentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-            int studentId = Int32.Parse(StudentIdFromJWT);
+            var studentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+            int studentId = Int32.Parse(studentIdFromJWT);
 
             var ContentList = _db.Contents.Where(c => c.ChapterId == chapter_id).ToList();
             
@@ -63,7 +63,7 @@ namespace Learning_App.Controllers
             int video_count = 0;
 
             List<Content> ListOfContents = new List<Content>();
-            
+            TrackPdfAndVideo trackPdfAndVideoObj = new TrackPdfAndVideo();
             for (var i = 0; i < ContentList.Count; i++)
             {
                 int? totalPages = null;
@@ -72,12 +72,12 @@ namespace Learning_App.Controllers
                 long? completedDuration = null;
 
                 if(ContentList[i].ContentType == "Pdf"){
-                    IDictionary<string,int?> trackPdfResponse = TrackPDF(ContentList[i].Id, studentId);
+                    IDictionary<string,int?> trackPdfResponse = trackPdfAndVideoObj.TrackPDF(ContentList[i].Id, studentId,_db);
                     totalPages = trackPdfResponse["Total"];
                     viewedPages = trackPdfResponse["Viewed"];
                 }
                 else{
-                    IDictionary<string,long?> trackVideoResponse = TrackVideo(ContentList[i].Id, studentId);
+                    IDictionary<string,long?> trackVideoResponse = trackPdfAndVideoObj.TrackVideo(ContentList[i].Id, studentId,_db);
                     totalDuration = trackVideoResponse["Total"];
                     completedDuration = trackVideoResponse["Completed"];
                 }
@@ -116,46 +116,6 @@ namespace Learning_App.Controllers
 
             string output = JsonConvert.SerializeObject(contentResponseObj);
             return output;
-        }
-
-        public IDictionary<string,int?> TrackPDF (int contentId, int studentId)
-        {
-            IDictionary<string, int?> trackPdfPages = new Dictionary<string, int?>();
-            var trackPdfObj = _db.TrackPdf.Where(tp => tp.ContentId == contentId && tp.StudentId == studentId).ToList();
-            int? totalPages = 0;
-            int? viewedPages = 0;
-            if(trackPdfObj.Count()!=0){
-                totalPages = trackPdfObj[0].TotalPages;
-                viewedPages = trackPdfObj[0].ViewedPages;
-                trackPdfPages.Add("Total",totalPages);
-                trackPdfPages.Add("Viewed", viewedPages);
-            }
-            else{
-                trackPdfPages.Add("Total",totalPages);
-                trackPdfPages.Add("Viewed", viewedPages);
-            }
-            return trackPdfPages;
-        }
-
-        public IDictionary<string,long?> TrackVideo (int contentId, int studentId)
-        {
-            IDictionary<string, long?> trackVideos = new Dictionary<string, long?>();
-            var trackVideoObj = _db.TrackVideos.Where(tv => tv.ContentId == contentId && tv.StudentId == studentId).ToList();
-            long? totalDurationInMins = 0;
-            long? completedDurationInMins = 0;
-            
-            if(trackVideoObj.Count()!=0){
-                totalDurationInMins = trackVideoObj[0].Totalduration;
-                completedDurationInMins = trackVideoObj[0].Completeduration;
-                trackVideos.Add("Total",totalDurationInMins);
-                trackVideos.Add("Completed", completedDurationInMins);
-            }
-            else{
-                trackVideos.Add("Total",totalDurationInMins);
-                trackVideos.Add("Completed", completedDurationInMins);
-            }
-            
-            return trackVideos;
         }
     }
 }

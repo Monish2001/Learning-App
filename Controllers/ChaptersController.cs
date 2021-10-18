@@ -17,7 +17,6 @@ namespace Learning_App.Controllers
         {    
             _db = db;
         }
-        
 
         [Authorize]
         [HttpGet]
@@ -27,19 +26,19 @@ namespace Learning_App.Controllers
             // To get the student id from jwt token
             var currentUser = HttpContext.User;
             
-            var StudentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-            int StudentId = Int32.Parse(StudentIdFromJWT);
+            var studentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+            int studentId = Int32.Parse(studentIdFromJWT);
             
-            var ChapterList = _db.Chapters.Where(c => c.SubjectId == sub_id).ToList();
+            var chapterList = _db.Chapters.Where(c => c.SubjectId == sub_id).ToList();
             
             List<Chapter> ListOfChapters = new List<Chapter>();
             
-            for (var i = 0; i < ChapterList.Count; i++)
+            for (var i = 0; i < chapterList.Count; i++)
             {
                 Chapter responseObj = new Chapter(){
-                    Id = ChapterList[i].Id,
-                    Name = ChapterList[i].Name,
-                    SubjectId = ChapterList[i].SubjectId
+                    Id = chapterList[i].Id,
+                    Name = chapterList[i].Name,
+                    SubjectId = chapterList[i].SubjectId
                 };
 
                 ListOfChapters.Add(responseObj);

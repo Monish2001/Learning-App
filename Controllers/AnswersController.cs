@@ -28,7 +28,7 @@ namespace Learning_App.Controllers
             var currentUser = HttpContext.User;
             
             var StudentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-            int StudentId = Int32.Parse(StudentIdFromJWT);
+            int studentId = Int32.Parse(StudentIdFromJWT);
 
             // bool MarksObtained = CheckAnswer(question_id,reqObj.OptionId);
             
@@ -36,16 +36,23 @@ namespace Learning_App.Controllers
                 MarkedForReview = reqObj.IsMarkedForReview,
                 // Attempted = true,
                 // MarksObtained = reqObj.OptionId,
-                StudentId = StudentId,
+                StudentId = studentId,
                 TrackExcerciseId = attempt_id,
                 OptionId = reqObj.OptionId,
                 QuestionId = question_id
             };
-                
+
+
+            var trackQuestionObj = _db.TrackQuestions.Where(tq => tq.StudentId == studentId && tq.QuestionId == question_id && tq.TrackExcerciseId == attempt_id).ToList();
+            if(trackQuestionObj.Count()!=0)
+            {
+                var result = new NotFoundObjectResult(new { message = "Already answer is added, please use update method to update the answer!!"});
+                return result;
+            }
             _db.TrackQuestions.Add(inputObj);
             _db.SaveChanges(); 
             
-            string output = AnswerControllerResponse("Added Successfully", question_id, StudentId, attempt_id);
+            string output = AnswerControllerResponse("Added Successfully", question_id, studentId, attempt_id);
             return Ok(output);
             
         }
@@ -58,15 +65,15 @@ namespace Learning_App.Controllers
             var currentUser = HttpContext.User;
             
             var StudentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-            int StudentId = Int32.Parse(StudentIdFromJWT);
+            int studentId = Int32.Parse(StudentIdFromJWT);
 
-            var trackQuestionObj = _db.TrackQuestions.Where(tq => tq.StudentId == StudentId && tq.QuestionId == question_id && tq.TrackExcerciseId == attempt_id).ToList();
+            var trackQuestionObj = _db.TrackQuestions.Where(tq => tq.StudentId == studentId && tq.QuestionId == question_id && tq.TrackExcerciseId == attempt_id).ToList();
             trackQuestionObj.ForEach(tq => tq.OptionId = reqObj.OptionId);
             trackQuestionObj.ForEach(tq => tq.MarkedForReview = reqObj.IsMarkedForReview);
             _db.SaveChanges();
 
     
-            string output = AnswerControllerResponse("Updated Successfully", question_id, StudentId, attempt_id);
+            string output = AnswerControllerResponse("Updated Successfully", question_id, studentId, attempt_id);
             return Ok(output);
         }
 
@@ -82,9 +89,9 @@ namespace Learning_App.Controllers
         //     }
         // }
 
-        public string AnswerControllerResponse(string message, int question_id, int StudentId, int attempt_id)
+        public string AnswerControllerResponse(string message, int question_id, int studentId, int attempt_id)
         {
-            var trackQuesObj = _db.TrackQuestions.Where(tq => tq.StudentId == StudentId && tq.QuestionId == question_id && tq.TrackExcerciseId == attempt_id).ToList();
+            var trackQuesObj = _db.TrackQuestions.Where(tq => tq.StudentId == studentId && tq.QuestionId == question_id && tq.TrackExcerciseId == attempt_id).ToList();
             bool isMarkedForReview = trackQuesObj[0].MarkedForReview;
             int? optionId = trackQuesObj[0].OptionId;
 

@@ -17,7 +17,6 @@ namespace Learning_App.Controllers
             _db = db;
         }
         
-
         [Authorize]
         [HttpGet]
         [Route("api/v1/chapters/{chapter_id}/excercises/{excercise_id}/questions")]
@@ -36,8 +35,8 @@ namespace Learning_App.Controllers
 
             List<Question> ListOfQuestion = new List<Question>();
             
-            // OptionsController optionsObj = new OptionsController(db);
             
+            OptionList optionObj = new OptionList();
             for (var i = 0; i < questionList.Count; i++)
             {
                 Question responseObj = new Question(){
@@ -46,7 +45,7 @@ namespace Learning_App.Controllers
                     QuestionStr = questionList[i].Question,
                     Timelimit = questionList[i].Timelimit,
                     MaxCredit = questionList[i].MaxCredit,
-                    Options = OptionsList(questionList[i].Id)
+                    Options = optionObj.OptionsList(questionList[i].Id,_db)
                 };
                 
                 ListOfQuestion.Add(responseObj);
@@ -58,30 +57,6 @@ namespace Learning_App.Controllers
 
             string output = JsonConvert.SerializeObject(optionResponseObj);
             return Ok(output);
-        }
-
-        public string OptionsList(int question_id)
-        {            
-            var optionsList = _db.Options.Where(o => o.QuestionId == question_id).ToList();
-            if(optionsList.Count() == 0)
-            {
-                return null;
-            }
-
-            List<Option> ListOfOptions = new List<Option>();
-            
-            for (var i = 0; i < optionsList.Count; i++)
-            {
-                Option responseObj = new Option(){
-                    Id = optionsList[i].Id,
-                    QuestionId = optionsList[i].QuestionId,
-                    OptionValue = optionsList[i].OptionValue,
-                };
-                
-                ListOfOptions.Add(responseObj);
-            }
-            string output = JsonConvert.SerializeObject(ListOfOptions);
-            return output;
         }
     }
 }
