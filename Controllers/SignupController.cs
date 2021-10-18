@@ -35,7 +35,7 @@ namespace Learning_App.Controllers
                 OtpId = OtpObj.Id
             };
             string output = JsonConvert.SerializeObject(responseObj);  
-            Console.WriteLine(output); 
+            // Console.WriteLine(output); 
             return Ok(output);
         }
     }
