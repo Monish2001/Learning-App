@@ -10,13 +10,13 @@ namespace Learning_App.Controllers
     public class QuestionsController : Controller    
     {
         private readonly LearningAppDbContext _db;
+        // LearningAppDbContext db;
     
         public QuestionsController(LearningAppDbContext db)    
         {    
             _db = db;
         }
         
-
         [Authorize]
         [HttpGet]
         [Route("api/v1/chapters/{chapter_id}/excercises/{excercise_id}/questions")]
@@ -34,7 +34,9 @@ namespace Learning_App.Controllers
             }
 
             List<Question> ListOfQuestion = new List<Question>();
-            // OptionsController optionsObj = new OptionsController(LearningAppDbContext db);
+            
+            
+            OptionList optionObj = new OptionList();
             for (var i = 0; i < questionList.Count; i++)
             {
                 Question responseObj = new Question(){
@@ -43,7 +45,7 @@ namespace Learning_App.Controllers
                     QuestionStr = questionList[i].Question,
                     Timelimit = questionList[i].Timelimit,
                     MaxCredit = questionList[i].MaxCredit,
-                    Options = "options"
+                    Options = optionObj.OptionsList(questionList[i].Id,_db)
                 };
                 
                 ListOfQuestion.Add(responseObj);

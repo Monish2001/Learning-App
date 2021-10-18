@@ -33,13 +33,13 @@ namespace Learning_App.Controllers
             int markedForReviewCount = 0;
 
             List<QuestionReport> listOfQuestionsReport = new List<QuestionReport>();
-            
+            OptionList optionObj = new OptionList();
             for (var i = 0; i < trackQuesObj.Count; i++)
             {
                 int quesId = trackQuesObj[i].QuestionId;
                 int? selectedOptionId = trackQuesObj[i].OptionId;
                 bool isMarkedForReview = trackQuesObj[i].MarkedForReview;
-                string options = OptionsList(quesId);
+                string options = optionObj.OptionsList(quesId,_db);
 
                 var quesObj = _db.Questions.Where(q => q.Id == quesId).ToList();
                 string question = quesObj[0].Question;
@@ -84,31 +84,6 @@ namespace Learning_App.Controllers
             };
             string output = JsonConvert.SerializeObject(previewObj);
             return Ok(output);
-        }
-
-        public string OptionsList(int question_id)
-        {            
-            var optionsList = _db.Options.Where(o => o.QuestionId == question_id).ToList();
-            Console.WriteLine(question_id);
-            if(optionsList.Count() == 0)
-            {
-                return null;
-            }
-
-            List<Option> ListOfOptions = new List<Option>();
-            
-            for (var i = 0; i < optionsList.Count; i++)
-            {
-                Option responseObj = new Option(){
-                    Id = optionsList[i].Id,
-                    QuestionId = optionsList[i].QuestionId,
-                    OptionValue = optionsList[i].OptionValue,
-                };
-                
-                ListOfOptions.Add(responseObj);
-            }
-            string output = JsonConvert.SerializeObject(ListOfOptions);
-            return output;
         }
     }
 }

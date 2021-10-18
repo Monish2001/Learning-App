@@ -46,7 +46,7 @@ namespace Learning_App.Controllers
                     Name = name,
                     SubId = subId,
                     TotalExcercise = totalExcercise,
-                    CompletionPercentage = 44
+                    CompletionPercentage = CalculateCompletionPercentageOfPracticeChapter(id,studentId)
                 };
 
                 listOfChaptersProgress.Add(chapterProgressObj);
@@ -58,6 +58,28 @@ namespace Learning_App.Controllers
 
             string output = JsonConvert.SerializeObject(responseObj);
             return Ok(output);
+        }
+
+        public double CalculateCompletionPercentageOfPracticeChapter(int chapterId, int studentId)
+        {
+            var excerciseObj = _db.Excercises.Where(e => e.ChapterId == chapterId).ToList();
+            int totalExcerciseCount = excerciseObj.Count();
+            int attemptedCount = 0;
+            double completedPercentage = 0;
+            for(var i=0; i< excerciseObj.Count;i++)
+            {
+                int excerciseId = excerciseObj[i].Id;
+                var attempted = _db.TrackExcercises.Where(te => te.StudentId == studentId && te.ExcerciseId == excerciseId).Count();
+            
+                if(attempted >= 1)
+                {
+                    attemptedCount += 1;
+                }
+            
+            }
+            completedPercentage = ((double)attemptedCount/(double)totalExcerciseCount)*100;
+            return completedPercentage;
+
         }
     }
 }

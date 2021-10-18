@@ -27,28 +27,28 @@ namespace Learning_App.Controllers
             // To get the student id from jwt token
             var currentUser = HttpContext.User;
             
-            var StudentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-            int StudentId = Int32.Parse(StudentIdFromJWT);
+            var studentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+            int studentId = Int32.Parse(studentIdFromJWT);
 
             Notes noteObj = new Notes(){
                 Createdtime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds(),
                 Note = reqObj.note,
-                StudentId = StudentId,
+                StudentId = studentId,
                 ContentId = content_id
             };
             
-            var responseObj = _db.Notes.Where(n => n.StudentId == StudentId && n.ContentId == content_id).ToList();
+            var responseObj = _db.Notes.Where(n => n.StudentId == studentId && n.ContentId == content_id).ToList();
             
             if(responseObj.Count() == 0)
             {
                 _db.Notes.Add(noteObj);
                 _db.SaveChanges();
-                var updatedObj = _db.Notes.Where(n => n.StudentId == StudentId && n.ContentId == content_id).ToList();
+                var updatedObj = _db.Notes.Where(n => n.StudentId == studentId && n.ContentId == content_id).ToList();
                 string output = NoteResponse(updatedObj);
                 return Ok(output);
             }
             else{
-                var UpdateNote = _db.Notes.Where(n => n.StudentId == StudentId && n.ContentId == content_id).ToList();
+                var UpdateNote = _db.Notes.Where(n => n.StudentId == studentId && n.ContentId == content_id).ToList();
                 UpdateNote.ForEach(v => v.Note = reqObj.note);
                 _db.SaveChanges();
 

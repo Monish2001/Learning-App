@@ -31,11 +31,11 @@ namespace Learning_App.Controllers
             GenerateOTP gOtp = new GenerateOTP();
             OTP OtpObj = gOtp.GenerateOtp(s,_db);
             SignupResponse responseObj = new SignupResponse(){
-                message = "User created successfully",
-                otp_id = OtpObj.Id
+                Message = "User created successfully",
+                OtpId = OtpObj.Id
             };
             string output = JsonConvert.SerializeObject(responseObj);  
-            Console.WriteLine(output); 
+            // Console.WriteLine(output); 
             return Ok(output);
         }
     }

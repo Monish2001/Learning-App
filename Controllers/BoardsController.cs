@@ -20,7 +20,6 @@ namespace Learning_App.Controllers
             _db = db;
         }
         
-
         [Authorize]
         [HttpGet]
         [Route("api/v1/boards")]
@@ -41,31 +40,34 @@ namespace Learning_App.Controllers
 
                 ListOfBoards.Add(responseObj);
             }
-            string output = JsonConvert.SerializeObject(ListOfBoards);  
+
+            ListBoardResponse boardResponseObj = new ListBoardResponse{
+                Boards = ListOfBoards
+            };
+            string output = JsonConvert.SerializeObject(boardResponseObj);  
             return Ok(output);
         }
 
         [Authorize]
-        [HttpPut]
+        [HttpPost]
         [Route("api/v1/boards")]
         public IActionResult SelectBoard([FromForm] BoardResquest boardObj)
         {
             var currentUser = HttpContext.User;
             
-            var StudentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-            int StudentId = Int32.Parse(StudentIdFromJWT);
-        
-            int BoardId = boardObj.Id;
+            var studentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+            int studentId = Int32.Parse(studentIdFromJWT);
+            int boardId = boardObj.Id;
 
             StudentEnrollments s = new StudentEnrollments{
-                StudentId = StudentId,
-                BoardId = BoardId
+                StudentId = studentId,
+                BoardId = boardId
             };
 
             _db.StudentEnrollments.Add(s);
             _db.SaveChanges();
             
-            var BoardDetails = _db.Boards.Where(b => b.Id == BoardId).ToList();
+            var BoardDetails = _db.Boards.Where(b => b.Id == boardId).ToList();
 
             Board responseObj = new Board(){
                     Id = BoardDetails[0].Id,
@@ -74,7 +76,10 @@ namespace Learning_App.Controllers
                     Logo = BoardDetails[0].Logo
                 };
 
-            string output = JsonConvert.SerializeObject(responseObj);  
+            PostBoardResponse boardResponseObj = new PostBoardResponse{
+                Board = responseObj
+            };
+            string output = JsonConvert.SerializeObject(boardResponseObj);
             return Ok(output);
         }
     }

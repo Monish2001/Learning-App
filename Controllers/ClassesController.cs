@@ -27,14 +27,14 @@ namespace Learning_App.Controllers
             // To get the student id from jwt token
             var currentUser = HttpContext.User;
             
-            var StudentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-            int StudentId = Int32.Parse(StudentIdFromJWT);
+            var studentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+            int studentId = Int32.Parse(studentIdFromJWT);
 
-            var BoardIdFromDb = _db.StudentEnrollments.Where(b => b.StudentId == StudentId).ToList();
+            var boardIdFromDb = _db.StudentEnrollments.Where(b => b.StudentId == studentId).ToList();
 
-            int BoardId = BoardIdFromDb[0].BoardId;
+            int boardId = boardIdFromDb[0].BoardId;
             
-            var classList = _db.Classes.Where(c => c.BoardId == BoardId).ToList();
+            var classList = _db.Classes.Where(c => c.BoardId == boardId).ToList();
             
             List<Class> ListOfClasses = new List<Class>();
             
@@ -47,8 +47,10 @@ namespace Learning_App.Controllers
 
                 ListOfClasses.Add(responseObj);
             }
-            string output = JsonConvert.SerializeObject(ListOfClasses);  
-            Console.WriteLine(output);
+            ListClassesResponse classResponseObj = new ListClassesResponse(){
+                Classes = ListOfClasses
+            };
+            string output = JsonConvert.SerializeObject(classResponseObj);
             return Ok(output);
         }
 
@@ -60,29 +62,30 @@ namespace Learning_App.Controllers
             // To get the student id from jwt token
             var currentUser = HttpContext.User;
             
-            var StudentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-            int StudentId = Int32.Parse(StudentIdFromJWT);
+            var studentIdFromJWT = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+            int studentId = Int32.Parse(studentIdFromJWT);
 
             
             int classId = classObj.Id;
-            // _db.Students.Where(s => s.Id == StudentId).ToList().Select(s => { s.ClassId = classId;});
-            // _db.Students.Where(s => s.Id == StudentId).ToList().SetValue(s => s.ClassId = classId);
-            
+
             // Update classId in students table
-            var Student = _db.Students.Where(s => s.Id == StudentId).ToList();
-            Student.ForEach(s => s.ClassId = classId);
+            var student = _db.Students.Where(s => s.Id == studentId).ToList();
+            student.ForEach(s => s.ClassId = classId);
             _db.SaveChanges();
             
             
-            var ClassDetails = _db.Classes.Where(c => c.Id == classId).ToList();
+            var classDetails = _db.Classes.Where(c => c.Id == classId).ToList();
 
             Class responseObj = new Class(){
-                    Id = ClassDetails[0].Id,
-                    Title = ClassDetails[0].Title
+                    Id = classDetails[0].Id,
+                    Title = classDetails[0].Title
             };
-
-            string output = JsonConvert.SerializeObject(responseObj);  
+            PostClassResponse classResponseObj = new PostClassResponse(){
+                Class = responseObj
+            };
+            string output = JsonConvert.SerializeObject(classResponseObj);
             return Ok(output);
+            
         }
     }
 }
